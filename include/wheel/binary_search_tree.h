@@ -105,7 +105,7 @@ optional binary_tree_search(binary_tree* tree, K search_term) {
         int cmp = comparator(current->key, search_term);
 
         if (cmp == 0) {
-            return optional_exists(current->value);
+            return optional_of(current->value);
         } else if (cmp < 0 && current->left) {
             current = current->left;
         } else if (0 < cmp && current->right) {

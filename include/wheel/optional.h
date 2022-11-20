@@ -11,19 +11,20 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
 #endif
 
-#define optional        LIBWHEEL_PREFIX(optional)
-#define optional_exists LIBWHEEL_PREFIX(optional_exists)
-#define optional_empty  LIBWHEEL_PREFIX(optional_empty)
+#define optional       LIBWHEEL_PREFIX(optional)
+#define optional_of    LIBWHEEL_PREFIX(optional_of)
+#define optional_empty LIBWHEEL_PREFIX(optional_empty)
 
 typedef struct optional {
     bool present;
     T value;
 } optional;
 
-optional optional_exists(T value) {
+optional optional_of(T value) {
     optional result;
     result.present = true;
     result.value = value;
+    return result;
 }
 
 optional optional_empty() {
