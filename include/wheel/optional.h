@@ -1,5 +1,5 @@
-#include "macros.h"
-#include "stdbool.h"
+#include <stdbool.h>
+#include <wheel/macros.h>
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
@@ -11,9 +11,9 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
 #endif
 
-#define optional        PREFIX(optional)
-#define optional_exists PREFIX(optional_exists)
-#define optional_empty  PREFIX(optional_empty)
+#define optional        LIBWHEEL_PREFIX(optional)
+#define optional_exists LIBWHEEL_PREFIX(optional_exists)
+#define optional_empty  LIBWHEEL_PREFIX(optional_empty)
 
 typedef struct optional {
     bool present;

@@ -1,6 +1,6 @@
-#include "macros.h"
-#include "stdint.h"
-#include "stdlib.h"
+#include <stdint.h>
+#include <stdlib.h>
+#include <wheel/macros.h>
 
 #ifdef LIBWHEEL_KEY_TYPE
 #define K LIBWHEEL_KEY_TYPE
@@ -18,13 +18,13 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
 #endif
 
-#define binary_tree           PREFIX(binary_tree)
-#define binary_tree_init      PREFIX(binary_tree_init)
-#define binary_tree_insert    PREFIX(binary_tree_insert)
-#define binary_tree_search    PREFIX(binary_tree_search)
-#define binary_tree_node      PREFIX(binary_tree_node)
-#define binary_tree_node_init PREFIX(binary_tree_node_init)
-#define comparator            PREFIX(comparator)
+#define binary_tree           LIBWHEEL_PREFIX(binary_tree)
+#define binary_tree_init      LIBWHEEL_PREFIX(binary_tree_init)
+#define binary_tree_insert    LIBWHEEL_PREFIX(binary_tree_insert)
+#define binary_tree_search    LIBWHEEL_PREFIX(binary_tree_search)
+#define binary_tree_node      LIBWHEEL_PREFIX(binary_tree_node)
+#define binary_tree_node_init LIBWHEEL_PREFIX(binary_tree_node_init)
+#define comparator            LIBWHEEL_PREFIX(comparator)
 
 #ifndef LIBWHEEL_COMPARATOR
 int comparator(const K a, const K b) { return b - a; }

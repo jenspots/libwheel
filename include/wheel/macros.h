@@ -1,8 +1,8 @@
 #ifndef LIBWHEEL_MACROS_H
 #define LIBWHEEL_MACROS_H
 
-#define CONCAT(x, y)  x##y
-#define CONCAT_(x, y) CONCAT(x, y)
-#define PREFIX(X)     CONCAT_(X, CONCAT_(_, LIBWHEEL_ALIAS))
+#define LIBWHEEL_CONCAT(x, y)  x##y
+#define LIBWHEEL_CONCAT_(x, y) LIBWHEEL_CONCAT(x, y)
+#define LIBWHEEL_PREFIX(X)     LIBWHEEL_CONCAT_(X, LIBWHEEL_CONCAT_(_, LIBWHEEL_ALIAS))
 
 #endif
