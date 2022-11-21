@@ -7,7 +7,7 @@
 #define LIBWHEEL_VALUE_TYPE int
 #define LIBWHEEL_ALIAS      int
 
-#include <wheel/binary_search_tree.h>
+#include <wheel/bst.h>
 
 #undef LIBWHEEL_KEY_TYPE
 #undef LIBWHEEL_VALUE_TYPE
