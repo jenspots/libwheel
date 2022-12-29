@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <wheel/macros.h>
@@ -78,7 +79,6 @@ optional vec_pop(vec* v, uint64_t index) {
     return optional_empty();
 }
 
-
 void vec_delete(vec* v) {
     assert(v);
     assert(v->values);
@@ -96,10 +96,7 @@ void vec_grow(vec* v) {
     assert(v);
     assert(v->values);
     v->size *= LIBWHEEL_VECTOR_SCALAR;
-    v->values = realloc(
-        v->values,
-        sizeof(optional) * v->size
-    );
+    v->values = realloc(v->values, sizeof(optional) * v->size);
     assert(v->values);
 }
 

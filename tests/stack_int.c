@@ -1,5 +1,5 @@
-#include <assert.h>
 #include "concrete/stack_int.h"
+#include <assert.h>
 
 int main() {
     stack_int s = stack_init_int();

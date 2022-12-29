@@ -4,7 +4,7 @@
 #include "./optional_int.h"
 #include "./vec_int.h"
 
-#define LIBWHEEL_TYPE int
+#define LIBWHEEL_TYPE  int
 #define LIBWHEEL_ALIAS int
 
 #include <wheel/stack.h>

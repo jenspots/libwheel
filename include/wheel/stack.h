@@ -1,7 +1,7 @@
 #include <wheel/macros.h>
 #include <wheel/types/optional.h>
-#include <wheel/types/vec.h>
 #include <wheel/types/stack.h>
+#include <wheel/types/vec.h>
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE

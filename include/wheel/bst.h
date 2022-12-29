@@ -2,8 +2,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <wheel/macros.h>
-#include <wheel/types/optional.h>
 #include <wheel/types/bst.h>
+#include <wheel/types/optional.h>
 
 #ifdef LIBWHEEL_KEY_TYPE
 #define K LIBWHEEL_KEY_TYPE
@@ -21,9 +21,9 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
 #endif
 
-#define comparator      LIBWHEEL_PREFIX(comparator)
-#define free_key        LIBWHEEL_PREFIX(free_key)
-#define free_value      LIBWHEEL_PREFIX(free_value)
+#define comparator LIBWHEEL_PREFIX(comparator)
+#define free_key   LIBWHEEL_PREFIX(free_key)
+#define free_value LIBWHEEL_PREFIX(free_value)
 
 #ifndef LIBWHEEL_COMPARATOR
 int comparator(const K a, const K b) { return b - a; }

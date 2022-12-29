@@ -1,4 +1,3 @@
-#include "concrete/bst_int.h"
 #include "concrete/vec_int.h"
 #include <assert.h>
 
