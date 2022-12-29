@@ -3,6 +3,7 @@
 
 #include "./optional_string.h"
 #include "string.h"
+#include <stdlib.h>
 
 #define LIBWHEEL_KEY_TYPE   char*
 #define LIBWHEEL_VALUE_TYPE char*
