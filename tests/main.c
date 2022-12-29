@@ -1,5 +1,6 @@
 #include "concrete/binary_tree_int.h"
 #include "concrete/binary_tree_string.h"
+#include "concrete/vec_int.h"
 #include <assert.h>
 #include <string.h>
 
@@ -31,4 +32,15 @@ int main(int argc, char** argv) {
     assert(!bst_insert_int(i, 0, 0));
     assert(!bst_insert_int(i, 2, 2));
     bst_delete_int(i);
+
+    vec_int v = vec_with_cap_int(5);
+    assert(v.size == 5);
+    for (int j = 0; j < 10; ++j) {
+        vec_set_int(&v, j, j);
+        optional_int o = vec_get_int(&v, j);
+        assert(o.present);
+        assert(o.value == j);
+    }
+    assert(v.size == 10);
+    vec_delete_int(&v);
 }

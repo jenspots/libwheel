@@ -29,9 +29,14 @@
 #define bst_node_init   LIBWHEEL_PREFIX(bst_node_init)
 #define bst_node_remove LIBWHEEL_PREFIX(bst_node_remove)
 #define bst_node_delete LIBWHEEL_PREFIX(bst_node_delete)
+
 #define comparator      LIBWHEEL_PREFIX(comparator)
 #define free_key        LIBWHEEL_PREFIX(free_key)
 #define free_value      LIBWHEEL_PREFIX(free_value)
+
+#define optional       LIBWHEEL_PREFIX(optional)
+#define optional_of    LIBWHEEL_PREFIX(optional_of)
+#define optional_empty LIBWHEEL_PREFIX(optional_empty)
 
 #ifndef LIBWHEEL_COMPARATOR
 int comparator(const K a, const K b) { return b - a; }

@@ -7,4 +7,6 @@ project(libwheel_poc
         VERSION 0.0.1)
 
 add_subdirectory(include)
+
+enable_testing()
 add_subdirectory(tests)

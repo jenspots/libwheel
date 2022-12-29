@@ -32,3 +32,8 @@ optional optional_empty() {
     result.present = false;
     return result;
 }
+
+#undef T
+#undef optional
+#undef optional_of
+#undef optional_empty
