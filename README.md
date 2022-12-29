@@ -1,3 +1,5 @@
+[![CTest](https://github.com/jenspots/libwheel/actions/workflows/ctest.yml/badge.svg)](https://github.com/jenspots/libwheel/actions/workflows/ctest.yml)
+
 # Wheel
 
 This repository provides a "generic datastructures in C" proof-of-concept. Wheel heavily relies on the C preprocessor and resolves at compile time, allowing for generics with (near) zero overhead.

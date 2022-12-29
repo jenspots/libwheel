@@ -4,7 +4,6 @@
 #define LIBWHEEL_TYPE int
 #define LIBWHEEL_ALIAS int
 
-
 #include "./optional_int.h"
 #include <wheel/vec.h>
 

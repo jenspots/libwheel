@@ -1,4 +1,4 @@
-file(GLOB SOURCES "wheel/*.h")
+file(GLOB SOURCES "wheel/*/*.h")
 
 add_library(wheel SHARED ${SOURCES})
 set_property(TARGET wheel PROPERTY LINKER_LANGUAGE C)

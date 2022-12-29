@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <wheel/macros.h>
+#include <wheel/types/optional.h>
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
@@ -10,10 +11,6 @@
 #ifndef LIBWHEEL_ALIAS
 #warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
 #endif
-
-#define optional       LIBWHEEL_PREFIX(optional)
-#define optional_of    LIBWHEEL_PREFIX(optional_of)
-#define optional_empty LIBWHEEL_PREFIX(optional_empty)
 
 typedef struct optional {
     bool present;
@@ -34,6 +31,3 @@ optional optional_empty() {
 }
 
 #undef T
-#undef optional
-#undef optional_of
-#undef optional_empty

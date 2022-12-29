@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <wheel/macros.h>
+#include <wheel/types/optional.h>
+#include <wheel/types/bst.h>
 
 #ifdef LIBWHEEL_KEY_TYPE
 #define K LIBWHEEL_KEY_TYPE
@@ -19,24 +21,9 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
 #endif
 
-#define bst             LIBWHEEL_PREFIX(bst)
-#define bst_init        LIBWHEEL_PREFIX(bst_init)
-#define bst_delete      LIBWHEEL_PREFIX(bst_delete)
-#define bst_insert      LIBWHEEL_PREFIX(bst_insert)
-#define bst_search      LIBWHEEL_PREFIX(bst_search)
-#define bst_remove      LIBWHEEL_PREFIX(bst_remove)
-#define bst_node        LIBWHEEL_PREFIX(bst_node)
-#define bst_node_init   LIBWHEEL_PREFIX(bst_node_init)
-#define bst_node_remove LIBWHEEL_PREFIX(bst_node_remove)
-#define bst_node_delete LIBWHEEL_PREFIX(bst_node_delete)
-
 #define comparator      LIBWHEEL_PREFIX(comparator)
 #define free_key        LIBWHEEL_PREFIX(free_key)
 #define free_value      LIBWHEEL_PREFIX(free_value)
-
-#define optional       LIBWHEEL_PREFIX(optional)
-#define optional_of    LIBWHEEL_PREFIX(optional_of)
-#define optional_empty LIBWHEEL_PREFIX(optional_empty)
 
 #ifndef LIBWHEEL_COMPARATOR
 int comparator(const K a, const K b) { return b - a; }
@@ -228,12 +215,3 @@ bool bst_remove(bst* tree, K key) {
 
 #undef K
 #undef V
-#undef bst
-#undef bst_init
-#undef bst_insert
-#undef bst_search
-#undef bst_node
-#undef bst_node_init
-#undef comparator
-#undef free_key
-#undef free_value
