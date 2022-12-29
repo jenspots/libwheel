@@ -1,4 +1,5 @@
 #include <wheel/macros.h>
+#include <wheel/misc/warnings.h>
 
 #define stack      LIBWHEEL_PREFIX(stack)
 #define stack_init LIBWHEEL_PREFIX(stack_init)

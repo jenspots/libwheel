@@ -17,10 +17,6 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_VALUE_TYPE"
 #endif
 
-#ifndef LIBWHEEL_ALIAS
-#warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
-#endif
-
 #define comparator LIBWHEEL_PREFIX(comparator)
 #define free_key   LIBWHEEL_PREFIX(free_key)
 #define free_value LIBWHEEL_PREFIX(free_value)

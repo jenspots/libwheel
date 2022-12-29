@@ -1,4 +1,5 @@
 #include <wheel/macros.h>
+#include <wheel/misc/warnings.h>
 
 #define vec            LIBWHEEL_PREFIX(vec)
 #define vec_init       LIBWHEEL_PREFIX(vec_init)

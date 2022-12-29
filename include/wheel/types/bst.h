@@ -1,4 +1,5 @@
 #include <wheel/macros.h>
+#include <wheel/misc/warnings.h>
 
 #define bst             LIBWHEEL_PREFIX(bst)
 #define bst_init        LIBWHEEL_PREFIX(bst_init)

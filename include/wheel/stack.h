@@ -9,10 +9,6 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
 #endif
 
-#ifndef LIBWHEEL_ALIAS
-#warning "MACRO NOT DEFINED: LIBWHEEL_ALIAS"
-#endif
-
 typedef struct stack stack;
 
 typedef struct stack {
