@@ -3,34 +3,13 @@
 #include <stdlib.h>
 #include <wheel/misc/macros.h>
 #include <wheel/types/bst.h>
+#include <wheel/types/interface.h>
 #include <wheel/types/optional.h>
 
-#ifdef LIBWHEEL_KEY_TYPE
-#define K LIBWHEEL_KEY_TYPE
+#ifdef LIBWHEEL_TYPE
+#define T LIBWHEEL_TYPE
 #else
 #warning "MACRO NOT DEFINED: LIBWHEEL_KEY_TYPE"
-#endif
-
-#ifdef LIBWHEEL_VALUE_TYPE
-#define V LIBWHEEL_VALUE_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_VALUE_TYPE"
-#endif
-
-#define comparator LIBWHEEL_PREFIX(comparator)
-#define free_key   LIBWHEEL_PREFIX(free_key)
-#define free_value LIBWHEEL_PREFIX(free_value)
-
-#ifndef LIBWHEEL_COMPARATOR
-int comparator(const K a, const K b) { return b - a; }
-#endif
-
-#ifndef LIBWHEEL_FREE_KEY
-void free_key(K key) { }
-#endif
-
-#ifndef LIBWHEEL_FREE_VALUE
-void free_value(V value) { }
 #endif
 
 typedef struct bst bst;
@@ -45,14 +24,12 @@ typedef struct bst_node {
     bst_node* parent;
     bst_node* left;
     bst_node* right;
-    K key;
-    V value;
+    T element;
 } bst_node;
 
-bst_node* bst_node_init(K key, V value) {
+bst_node* bst_node_init(T element) {
     bst_node* result = calloc(1, sizeof(bst_node));
-    result->key = key;
-    result->value = value;
+    result->element = element;
     return result;
 }
 
@@ -65,9 +42,7 @@ bst* bst_init() {
 
 void bst_node_delete(bst_node* node) {
     assert(node);
-
-    free_key(node->key);
-    free_value(node->value);
+    destroy(node->element);
     free(node);
 }
 
@@ -128,25 +103,25 @@ void bst_delete(bst* tree) {
     free(tree);
 }
 
-bool bst_insert(bst* tree, K key, V value) {
+bool bst_insert(bst* tree, T element) {
     assert(tree);
 
     bst_node* current = tree->root;
 
     if (tree->root == NULL) {
-        tree->root = bst_node_init(key, value);
+        tree->root = bst_node_init(element);
         tree->size = 1;
         return true;
     }
 
     while (1) {
-        int cmp = comparator(current->key, key);
+        int cmp = compare(current->element, element);
 
         if (cmp == 0) {
             return false;
         } else if (cmp < 0) {
             if (current->left == NULL) {
-                current->left = bst_node_init(key, value);
+                current->left = bst_node_init(element);
                 current->left->parent = current;
                 tree->size += 1;
                 return true;
@@ -154,7 +129,7 @@ bool bst_insert(bst* tree, K key, V value) {
             current = current->left;
         } else {
             if (current->right == NULL) {
-                current->right = bst_node_init(key, value);
+                current->right = bst_node_init(element);
                 current->right->parent = current;
                 tree->size += 1;
                 return true;
@@ -164,7 +139,7 @@ bool bst_insert(bst* tree, K key, V value) {
     }
 }
 
-optional bst_search(bst* tree, K key) {
+optional bst_search(bst* tree, T element) {
     assert(tree);
 
     bst_node* current = tree->root;
@@ -174,10 +149,10 @@ optional bst_search(bst* tree, K key) {
     }
 
     while (1) {
-        int cmp = comparator(current->key, key);
+        int cmp = compare(current->element, element);
 
         if (cmp == 0) {
-            return optional_of(current->value);
+            return optional_of(current->element);
         } else if (cmp < 0 && current->left) {
             current = current->left;
         } else if (0 < cmp && current->right) {
@@ -188,13 +163,13 @@ optional bst_search(bst* tree, K key) {
     }
 }
 
-bool bst_remove(bst* tree, K key) {
+bool bst_remove(bst* tree, T element) {
     assert(tree);
 
     bst_node* current = tree->root;
 
     while (1) {
-        int cmp = comparator(current->key, key);
+        int cmp = compare(current->element, element);
 
         if (cmp == 0) {
             bst_node_remove(tree, current);
@@ -209,5 +184,4 @@ bool bst_remove(bst* tree, K key) {
     }
 }
 
-#undef K
-#undef V
+#undef T

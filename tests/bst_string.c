@@ -3,13 +3,14 @@
 
 int main() {
     bst_string* s = bst_init_string();
-    assert(bst_insert_string(s, "bac", strdup("1")));
-    assert(bst_insert_string(s, "abc", strdup("0")));
-    assert(bst_insert_string(s, "cab", strdup("2")));
 
-    assert(!bst_insert_string(s, "bac", strdup("1")));
-    assert(!bst_insert_string(s, "abc", strdup("0")));
-    assert(!bst_insert_string(s, "cab", strdup("2")));
+    assert(bst_insert_string(s, strdup("bac")));
+    assert(bst_insert_string(s, strdup("abc")));
+    assert(bst_insert_string(s, strdup("cab")));
+
+    assert(!bst_insert_string(s, "bac"));
+    assert(!bst_insert_string(s, "abc"));
+    assert(!bst_insert_string(s, "cab"));
 
     assert(bst_search_string(s, "bac").present);
     assert(bst_search_string(s, "abc").present);

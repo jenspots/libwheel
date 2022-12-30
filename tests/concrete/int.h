@@ -3,11 +3,11 @@
 
 #include <stdint.h>
 
-int64_t compare_int(int a, int b) {
+int64_t compare_int(const int a, const int b) {
     return b - a;
 }
 
-uint64_t hash_int(int t) {
+uint64_t hash_int(const int t) {
     return t;
 }
 
@@ -15,7 +15,7 @@ void destroy_int(int t) {
     // pass
 }
 
-int clone_int(int t) {
+int clone_int(const int t) {
     return t;
 }
 

@@ -20,6 +20,7 @@ int64_t compare_string(const char* a, const char* b) {
         } else if (a[i] == '\0') {
             return 0;
         }
+        i += 1;
     }
 }
 
