@@ -1,4 +1,4 @@
-#include "concrete/vec_int.h"
+#include "concrete/int.h"
 #include <assert.h>
 
 int main(int argc, char** argv) {

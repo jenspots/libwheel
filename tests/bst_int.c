@@ -1,4 +1,4 @@
-#include "concrete/bst_int.h"
+#include "concrete/int.h"
 
 int main() {
     bst_int* i = bst_init_int();

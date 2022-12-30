@@ -1,4 +1,4 @@
-#include "concrete/stack_int.h"
+#include "concrete/int.h"
 #include <assert.h>
 
 int main() {

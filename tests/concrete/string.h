@@ -7,6 +7,14 @@
 #include <stdint.h>
 #include <string.h>
 
+#define LIBWHEEL_TYPE  char*
+#define LIBWHEEL_ALIAS string
+
+#include <wheel/optional.h>
+#include <wheel/bst.h>
+#include <wheel/vec.h>
+#include <wheel/stack.h>
+
 int64_t compare_string(const char* a, const char* b) {
     assert(a);
     assert(b);
@@ -28,7 +36,7 @@ void destroy_string(char* value) {
     free(value);
 }
 
-char* copy_string(char* value) {
+char* clone_string(const char* value) {
     char* result = strdup(value);
     assert(result);
     return result;

@@ -3,6 +3,14 @@
 
 #include <stdint.h>
 
+#define LIBWHEEL_TYPE  int
+#define LIBWHEEL_ALIAS int
+
+#include <wheel/optional.h>
+#include <wheel/bst.h>
+#include <wheel/vec.h>
+#include <wheel/stack.h>
+
 int64_t compare_int(const int a, const int b) {
     return b - a;
 }

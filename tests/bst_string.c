@@ -1,4 +1,4 @@
-#include "concrete/bst_string.h"
+#include "concrete/string.h"
 #include <assert.h>
 
 int main() {
