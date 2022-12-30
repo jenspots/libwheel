@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <wheel/macros.h>
 #include <wheel/types/optional.h>
 #include <wheel/types/vec.h>
@@ -113,6 +114,50 @@ void vec_foreach(vec* v, void (*f)(T)) {
             f(element.value);
         }
     }
+}
+
+void vec_map(vec* v, T (*f)(T)) {
+    assert(v);
+
+    for (uint64_t i = 0; i < v->size; ++i) {
+        optional element = vec_get(v, i);
+        if (element.present) {
+            v->values[i] = optional_of(f(element.value));
+        }
+    }
+}
+
+void vec_filter(vec* v, bool(*f)(T)) {
+    assert(v);
+
+    for (uint64_t i = 0; i < v->size; ++i) {
+        optional element = vec_get(v, i);
+        if (element.present && !f(element.value)) {
+            vec_free_type(element.value);
+            v->values[i] = optional_empty();
+        }
+    }
+}
+
+vec vec_shallow_clone(vec* v) {
+    vec clone = {
+        .values = malloc(sizeof(T) * v->size),
+        .size = v->size,
+    };
+
+    assert(clone.values);
+    memcpy(clone.values, v->values, v->size * sizeof(T));
+
+    return clone;
+}
+
+vec vec_deep_clone(vec* v) {
+    // TODO
+    exit(-1);
+    vec clone;
+    clone.values = NULL;
+    clone.size = 0;
+    return clone;
 }
 
 #undef T

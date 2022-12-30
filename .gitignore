@@ -1,3 +1,6 @@
 cmake-*
+build*
 .DS_Store
 build
+.idea
+.vs-code
