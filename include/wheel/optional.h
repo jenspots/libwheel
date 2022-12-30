@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include <wheel/macros.h>
+#include <wheel/misc/macros.h>
 #include <wheel/types/optional.h>
 
 #ifdef LIBWHEEL_TYPE

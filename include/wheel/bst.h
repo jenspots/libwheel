@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <wheel/macros.h>
+#include <wheel/misc/macros.h>
 #include <wheel/types/bst.h>
 #include <wheel/types/optional.h>
 

@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <wheel/macros.h>
-#include <wheel/types/optional.h>
+#include <wheel/misc/macros.h>
 #include <wheel/types/interface.h>
+#include <wheel/types/optional.h>
 #include <wheel/types/vec.h>
 
 #ifdef LIBWHEEL_TYPE
@@ -120,7 +120,7 @@ void vec_map(vec* v, T (*f)(T)) {
     }
 }
 
-void vec_filter(vec* v, bool(*f)(T)) {
+void vec_filter(vec* v, bool (*f)(T)) {
     assert(v);
 
     for (uint64_t i = 0; i < v->size; ++i) {
