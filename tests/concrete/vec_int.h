@@ -1,6 +1,7 @@
 #ifndef LIBWHEEL_VEC_INT
 #define LIBWHEEL_VEC_INT
 
+#include "./int.h"
 #include "./optional_int.h"
 
 #define LIBWHEEL_TYPE  int

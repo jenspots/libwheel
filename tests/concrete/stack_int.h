@@ -1,6 +1,7 @@
 #ifndef LIBWHEEL_STACK_INT
 #define LIBWHEEL_STACK_INT
 
+#include "./int.h"
 #include "./optional_int.h"
 #include "./vec_int.h"
 

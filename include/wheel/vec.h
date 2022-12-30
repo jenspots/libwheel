@@ -4,6 +4,7 @@
 #include <string.h>
 #include <wheel/macros.h>
 #include <wheel/types/optional.h>
+#include <wheel/types/interface.h>
 #include <wheel/types/vec.h>
 
 #ifdef LIBWHEEL_TYPE
@@ -18,14 +19,6 @@
 
 #ifndef LIBWHEEL_VECTOR_SCALAR
 #define LIBWHEEL_VECTOR_SCALAR 2
-#endif
-
-#ifndef LIBWHEEL_COMPARATOR
-int vec_comparator(const T a, const T b) { return b - a; }
-#endif
-
-#ifndef LIBWHEEL_FREE_T
-void vec_free_type(T value) { }
 #endif
 
 typedef struct vec vec;
@@ -83,7 +76,7 @@ void vec_delete(vec* v) {
     for (uint64_t i = 0; i < v->size; ++i) {
         optional element = vec_get(v, i);
         if (element.present) {
-            vec_free_type(element.value);
+            destroy(element.value);
         }
     }
     free(v->values);
@@ -133,31 +126,40 @@ void vec_filter(vec* v, bool(*f)(T)) {
     for (uint64_t i = 0; i < v->size; ++i) {
         optional element = vec_get(v, i);
         if (element.present && !f(element.value)) {
-            vec_free_type(element.value);
+            destroy(element.value);
             v->values[i] = optional_empty();
         }
     }
 }
 
 vec vec_shallow_clone(vec* v) {
-    vec clone = {
+    vec copy = {
         .values = malloc(sizeof(T) * v->size),
         .size = v->size,
     };
 
-    assert(clone.values);
-    memcpy(clone.values, v->values, v->size * sizeof(T));
+    assert(copy.values);
+    memcpy(copy.values, v->values, v->size * sizeof(T));
 
-    return clone;
+    return copy;
 }
 
 vec vec_deep_clone(vec* v) {
-    // TODO
-    exit(-1);
-    vec clone;
-    clone.values = NULL;
-    clone.size = 0;
-    return clone;
+    vec copy = {
+        .values = malloc(sizeof(T) * v->size),
+        .size = v->size,
+    };
+
+    for (int i = 0; i < v->size; ++i) {
+        optional element = vec_get(v, i);
+        if (element.present) {
+            copy.values[i] = optional_of(clone(element.value));
+        } else {
+            copy.values[i] = element;
+        }
+    }
+
+    return copy;
 }
 
 #undef T
