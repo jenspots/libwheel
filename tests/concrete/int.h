@@ -10,21 +10,25 @@
 #include <wheel/bst.h>
 #include <wheel/vec.h>
 #include <wheel/stack.h>
+#include <wheel/types/interface.h>
 
-int64_t compare_int(const int a, const int b) {
+int64_t compare(const int a, const int b) {
     return b - a;
 }
 
-uint64_t hash_int(const int t) {
+uint64_t hash(const int t) {
     return t;
 }
 
-void destroy_int(int t) {
+void destroy(int t) {
     // pass
 }
 
-int clone_int(const int t) {
+int clone(const int t) {
     return t;
 }
+
+#undef LIBWHEEL_TYPE
+#undef LIBWHEEL_ALIAS
 
 #endif // LIBWHEEL_INT_H

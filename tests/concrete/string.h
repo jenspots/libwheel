@@ -14,8 +14,9 @@
 #include <wheel/bst.h>
 #include <wheel/vec.h>
 #include <wheel/stack.h>
+#include <wheel/types/interface.h>
 
-int64_t compare_string(const char* a, const char* b) {
+int64_t compare(const char* a, const char* b) {
     assert(a);
     assert(b);
 
@@ -32,14 +33,17 @@ int64_t compare_string(const char* a, const char* b) {
     }
 }
 
-void destroy_string(char* value) {
+void destroy(char* value) {
     free(value);
 }
 
-char* clone_string(const char* value) {
+char* clone(const char* value) {
     char* result = strdup(value);
     assert(result);
     return result;
 }
+
+#undef LIBWHEEL_TYPE
+#undef LIBWHEEL_ALIAS
 
 #endif // LIBWHEEL_STRING_H
