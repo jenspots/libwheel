@@ -3,28 +3,29 @@
 
 #include <stdint.h>
 
-#define LIBWHEEL_TYPE  int
+#define LIBWHEEL_TYPE  uint64_t
 #define LIBWHEEL_ALIAS int
 
 #include <wheel/optional.h>
 #include <wheel/bst.h>
 #include <wheel/vec.h>
+#include <wheel/eht.h>
 #include <wheel/stack.h>
 #include <wheel/types/interface.h>
 
-int64_t compare(const int a, const int b) {
-    return b - a;
+int64_t compare(const uint64_t a, const uint64_t b) {
+    return a < b;
 }
 
-uint64_t hash(const int t) {
+uint64_t hash(const uint64_t t) {
     return t;
 }
 
-void destroy(int t) {
+void destroy(uint64_t t) {
     // pass
 }
 
-int clone(const int t) {
+uint64_t clone(const uint64_t t) {
     return t;
 }
 
