@@ -10,11 +10,7 @@
 #define LIBWHEEL_TYPE  char*
 #define LIBWHEEL_ALIAS string
 
-#include <wheel/optional.h>
-#include <wheel/bst.h>
-#include <wheel/vec.h>
-#include <wheel/stack.h>
-#include <wheel/types/interface.h>
+#include <wheel/wheel.h>
 
 int64_t compare(const char* a, const char* b) {
     assert(a);
@@ -31,6 +27,10 @@ int64_t compare(const char* a, const char* b) {
         }
         i += 1;
     }
+}
+
+uint64_t hash(const char* t) {
+    exit(-1);
 }
 
 void destroy(char* value) {

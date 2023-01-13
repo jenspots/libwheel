@@ -6,15 +6,16 @@
 #define LIBWHEEL_TYPE  uint64_t
 #define LIBWHEEL_ALIAS int
 
-#include <wheel/optional.h>
-#include <wheel/bst.h>
-#include <wheel/vec.h>
-#include <wheel/eht.h>
-#include <wheel/stack.h>
-#include <wheel/types/interface.h>
+#include <wheel/wheel.h>
 
 int64_t compare(const uint64_t a, const uint64_t b) {
-    return a < b;
+    if (a == b) {
+        return 0;
+    } else if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    }
 }
 
 uint64_t hash(const uint64_t t) {
