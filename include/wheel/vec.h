@@ -7,6 +7,10 @@
 #include <wheel/types/optional.h>
 #include <wheel/types/vec.h>
 
+#include <wheel/def/optional.h>
+#include <wheel/def/interface.h>
+#include <wheel/def/vec.h>
+
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
 #else
@@ -20,8 +24,6 @@
 #ifndef LIBWHEEL_VECTOR_SCALAR
 #define LIBWHEEL_VECTOR_SCALAR 2
 #endif
-
-typedef struct vec vec;
 
 typedef struct vec {
     optional* values;
@@ -162,4 +164,4 @@ vec vec_deep_clone(vec* v) {
     return copy;
 }
 
-#undef T
+#include <wheel/undef/wheel.h>

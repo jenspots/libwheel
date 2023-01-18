@@ -8,6 +8,9 @@
 
 #include <wheel/wheel.h>
 
+#undef LIBWHEEL_TYPE
+#undef LIBWHEEL_ALIAS
+
 int64_t compare_int(const uint64_t a, const uint64_t b) {
     if (a == b) {
         return 0;
@@ -29,8 +32,5 @@ void destroy_int(uint64_t t) {
 uint64_t clone_int(const uint64_t t) {
     return t;
 }
-
-#undef LIBWHEEL_TYPE
-#undef LIBWHEEL_ALIAS
 
 #endif // LIBWHEEL_INT_H

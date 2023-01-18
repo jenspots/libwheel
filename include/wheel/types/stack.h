@@ -1,8 +1,11 @@
-#include <wheel/misc/macros.h>
-#include <wheel/misc/warnings.h>
+#include <wheel/def/wheel.h>
 
-#define stack      LIBWHEEL_PREFIX(stack)
-#define stack_init LIBWHEEL_PREFIX(stack_init)
-#define stack_push LIBWHEEL_PREFIX(stack_push)
-#define stack_peek LIBWHEEL_PREFIX(stack_peek)
-#define stack_pop  LIBWHEEL_PREFIX(stack_pop)
+typedef struct stack stack;
+
+stack stack_init();
+
+void stack_push(stack* s, T element);
+
+optional stack_pop(stack* s);
+
+#include <wheel/undef/wheel.h>

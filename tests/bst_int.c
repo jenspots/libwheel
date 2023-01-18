@@ -1,4 +1,6 @@
-#include "concrete/int.h"
+#include <assert.h>
+
+#include "impl/int.h"
 
 int main() {
     bst_int* i = bst_init_int();

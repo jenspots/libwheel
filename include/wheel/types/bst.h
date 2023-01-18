@@ -1,13 +1,25 @@
-#include <wheel/misc/macros.h>
-#include <wheel/misc/warnings.h>
+#include <stdbool.h>
 
-#define bst             LIBWHEEL_PREFIX(bst)
-#define bst_init        LIBWHEEL_PREFIX(bst_init)
-#define bst_delete      LIBWHEEL_PREFIX(bst_delete)
-#define bst_insert      LIBWHEEL_PREFIX(bst_insert)
-#define bst_search      LIBWHEEL_PREFIX(bst_search)
-#define bst_remove      LIBWHEEL_PREFIX(bst_remove)
-#define bst_node        LIBWHEEL_PREFIX(bst_node)
-#define bst_node_init   LIBWHEEL_PREFIX(bst_node_init)
-#define bst_node_remove LIBWHEEL_PREFIX(bst_node_remove)
-#define bst_node_delete LIBWHEEL_PREFIX(bst_node_delete)
+#include <wheel/def/wheel.h>
+
+typedef struct bst bst;
+
+typedef struct bst_node bst_node;
+
+bst_node* bst_node_init(LIBWHEEL_TYPE element);
+
+bst* bst_init();
+
+void bst_node_delete(bst_node* node);
+
+void bst_node_remove(bst* tree, bst_node* node);
+
+void bst_delete(bst* tree);
+
+bool bst_insert(bst* tree, LIBWHEEL_TYPE element);
+
+optional bst_search(bst* tree, LIBWHEEL_TYPE element);
+
+bool bst_remove(bst* tree, LIBWHEEL_TYPE element);
+
+#include <wheel/undef/wheel.h>

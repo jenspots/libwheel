@@ -13,6 +13,16 @@
 #define LIBWHEEL_EHT_BUCKET_SIZE 2
 #endif
 
+#ifdef LIBWHEEL_TYPE
+#define T LIBWHEEL_TYPE
+#else
+#warning "MACRO NOT DEFINED: LIBWHEEL_KEY_TYPE"
+#endif
+
+#include <wheel/def/optional.h>
+#include <wheel/def/interface.h>
+#include <wheel/def/eht.h>
+
 typedef struct eht {
     ehtb** buckets;
     uint64_t bit_count;
@@ -141,7 +151,7 @@ optional ehtb_search(ehtb* bucket, uint64_t hash_value) {
     return optional_empty();
 }
 
-static optional eht_search(eht* table, T element) {
+optional eht_search(eht* table, T element) {
     ehtb* bucket = table->buckets[eht_index(table, element)];
     assert(bucket);
     return ehtb_search(bucket, hash(element));
@@ -150,3 +160,7 @@ static optional eht_search(eht* table, T element) {
 uint64_t eht_capacity(eht* e) {
     return 1 << (e->bit_count);
 }
+
+#include <wheel/undef/optional.h>
+#include <wheel/undef/interface.h>
+#include <wheel/undef/eht.h>
