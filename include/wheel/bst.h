@@ -1,19 +1,16 @@
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <wheel/misc/macros.h>
-#include <wheel/types/bst.h>
 #include <wheel/types/interface.h>
-#include <wheel/types/optional.h>
+#include <wheel/types/bst.h>
+
+#include <wheel/def/wheel.h>
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
 #else
 #warning "MACRO NOT DEFINED: LIBWHEEL_KEY_TYPE"
 #endif
-
-typedef struct bst bst;
-typedef struct bst_node bst_node;
 
 typedef struct bst {
     bst_node* root;
@@ -184,4 +181,4 @@ bool bst_remove(bst* tree, T element) {
     }
 }
 
-#undef T
+#include <wheel/undef/wheel.h>

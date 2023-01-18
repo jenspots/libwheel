@@ -1,16 +1,15 @@
 #ifndef LIBWHEEL_STRING_H
 #define LIBWHEEL_STRING_H
 
-#include <assert.h>
-#include <stdbool.h>
-#include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
 
 #define LIBWHEEL_TYPE  char*
 #define LIBWHEEL_ALIAS string
 
 #include <wheel/wheel.h>
+
+#undef LIBWHEEL_TYPE
+#undef LIBWHEEL_ALIAS
 
 int64_t compare_string(const char* a, const char* b) {
     assert(a);
@@ -42,8 +41,5 @@ char* clone_string(const char* value) {
     assert(result);
     return result;
 }
-
-#undef LIBWHEEL_TYPE
-#undef LIBWHEEL_ALIAS
 
 #endif // LIBWHEEL_STRING_H

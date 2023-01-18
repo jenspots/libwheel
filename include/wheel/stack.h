@@ -9,7 +9,9 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
 #endif
 
-typedef struct stack stack;
+#include <wheel/def/stack.h>
+#include <wheel/def/optional.h>
+#include <wheel/def/vec.h>
 
 typedef struct stack {
     vec values;
@@ -38,4 +40,6 @@ optional stack_pop(stack* s) {
     }
 }
 
-#undef T
+#include <wheel/undef/stack.h>
+#include <wheel/undef/optional.h>
+#include <wheel/undef/vec.h>

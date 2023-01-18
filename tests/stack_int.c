@@ -1,4 +1,4 @@
-#include "concrete/int.h"
+#include "impl/int.h"
 #include <assert.h>
 
 int main() {

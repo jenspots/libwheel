@@ -1,18 +1,29 @@
-#include <wheel/misc/macros.h>
-#include <wheel/misc/warnings.h>
+#include <wheel/def/wheel.h>
 
-#define vec               LIBWHEEL_PREFIX(vec)
-#define vec_init          LIBWHEEL_PREFIX(vec_init)
-#define vec_with_cap      LIBWHEEL_PREFIX(vec_with_cap)
-#define vec_delete        LIBWHEEL_PREFIX(vec_delete)
-#define vec_pop           LIBWHEEL_PREFIX(vec_pop)
-#define vec_get           LIBWHEEL_PREFIX(vec_get)
-#define vec_set           LIBWHEEL_PREFIX(vec_set)
-#define vec_grow          LIBWHEEL_PREFIX(vec_grow)
-#define vec_foreach       LIBWHEEL_PREFIX(vec_foreach)
-#define vec_comparator    LIBWHEEL_PREFIX(vec_comparator)
-#define vec_free_type     LIBWHEEL_PREFIX(vec_free_type)
-#define vec_map           LIBWHEEL_PREFIX(vec_map)
-#define vec_filter        LIBWHEEL_PREFIX(vec_filter)
-#define vec_shallow_clone LIBWHEEL_PREFIX(vec_shallow_clone)
-#define vec_deep_clone    LIBWHEEL_PREFIX(vec_deep_clone)
+typedef struct vec vec;
+
+vec vec_init();
+
+vec vec_with_cap(uint64_t capacity);
+
+optional vec_get(vec* v, uint64_t index);
+
+optional vec_pop(vec* v, uint64_t index);
+
+void vec_delete(vec* v);
+
+void vec_grow(vec* v);
+
+void vec_set(vec* v, uint64_t index, LIBWHEEL_TYPE value);
+
+void vec_foreach(vec* v, void (*f)(LIBWHEEL_TYPE));
+
+void vec_map(vec* v, LIBWHEEL_TYPE (*f)(LIBWHEEL_TYPE));
+
+void vec_filter(vec* v, bool (*f)(LIBWHEEL_TYPE));
+
+vec vec_shallow_clone(vec* v);
+
+vec vec_deep_clone(vec* v);
+
+#include <wheel/undef/wheel.h>

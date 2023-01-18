@@ -1,4 +1,5 @@
-#include "./concrete/int.h"
+#include <assert.h>
+#include "impl/int.h"
 
 int main() {
     eht_int* t = eht_init_int();
@@ -21,7 +22,7 @@ int main() {
     assert(eht_index_int(t, b11100) == 1);
     assert(eht_insert_int(t, b11100));
 
-    assert(t->bit_count == 1);
+    assert(eht_capacity_int(t) == 2);
 
     assert(eht_search_int(t, b00100).present);
     assert(eht_search_int(t, b01111).present);
@@ -29,7 +30,7 @@ int main() {
     assert(eht_search_int(t, b11100).present);
 
     assert(eht_insert_int(t, b11111));
-    assert(t->bit_count == 2);
+    assert(eht_capacity_int(t) == 4);
 
     assert(eht_search_int(t, b00100).present);
     assert(eht_search_int(t, b01111).present);
