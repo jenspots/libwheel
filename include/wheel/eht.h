@@ -101,7 +101,7 @@ uint64_t eht_index(eht* table, T element) {
 bool eht_insert(eht* table, T element) {
     while (true) {
         uint64_t hash_value = hash(element);
-        uint64_t bucket_index = eht_index(table, hash_value);
+        uint64_t bucket_index = eht_index(table, element);
         ehtb* bucket = table->buckets[bucket_index];
         bool free_element = false;
         uint64_t free_index;
@@ -141,7 +141,7 @@ optional ehtb_search(ehtb* bucket, uint64_t hash_value) {
     return optional_empty();
 }
 
-optional eht_search(eht* table, T element) {
+static optional eht_search(eht* table, T element) {
     ehtb* bucket = table->buckets[eht_index(table, element)];
     assert(bucket);
     return ehtb_search(bucket, hash(element));

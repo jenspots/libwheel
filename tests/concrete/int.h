@@ -8,7 +8,7 @@
 
 #include <wheel/wheel.h>
 
-int64_t compare(const uint64_t a, const uint64_t b) {
+int64_t compare_int(const uint64_t a, const uint64_t b) {
     if (a == b) {
         return 0;
     } else if (a > b) {
@@ -18,15 +18,15 @@ int64_t compare(const uint64_t a, const uint64_t b) {
     }
 }
 
-uint64_t hash(const uint64_t t) {
+uint64_t hash_int(const uint64_t t) {
     return t;
 }
 
-void destroy(uint64_t t) {
+void destroy_int(uint64_t t) {
     // pass
 }
 
-uint64_t clone(const uint64_t t) {
+uint64_t clone_int(const uint64_t t) {
     return t;
 }
 

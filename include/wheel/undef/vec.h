@@ -1,0 +1,14 @@
+#undef vec
+#undef vec_init
+#undef vec_with_cap
+#undef vec_delete
+#undef vec_pop
+#undef vec_get
+#undef vec_set
+#undef vec_grow
+#undef vec_foreach
+#undef vec_comparator
+#undef vec_free_type
+#undef vec_map
+#undef vec_filter
+#undef vec_shallow_clone

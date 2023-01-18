@@ -1,0 +1,10 @@
+#undef bst
+#undef bst_init
+#undef bst_delete
+#undef bst_insert
+#undef bst_search
+#undef bst_remove
+#undef bst_node
+#undef bst_node_init
+#undef bst_node_remove
+#undef bst_node_delete

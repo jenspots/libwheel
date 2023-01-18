@@ -12,7 +12,7 @@
 
 #include <wheel/wheel.h>
 
-int64_t compare(const char* a, const char* b) {
+int64_t compare_string(const char* a, const char* b) {
     assert(a);
     assert(b);
 
@@ -29,15 +29,15 @@ int64_t compare(const char* a, const char* b) {
     }
 }
 
-uint64_t hash(const char* t) {
+uint64_t hash_string(const char* t) {
     exit(-1);
 }
 
-void destroy(char* value) {
+void destroy_string(char* value) {
     free(value);
 }
 
-char* clone(const char* value) {
+char* clone_string(const char* value) {
     char* result = strdup(value);
     assert(result);
     return result;
