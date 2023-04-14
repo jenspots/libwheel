@@ -4,3 +4,4 @@
 #include "wheel/optional/def.h"
 #include "wheel/stack/def.h"
 #include "wheel/vec/def.h"
+#include "wheel/trie/def.h"

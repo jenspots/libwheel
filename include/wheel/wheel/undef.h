@@ -4,3 +4,4 @@
 #include "wheel/optional/undef.h"
 #include "wheel/stack/undef.h"
 #include "wheel/vec/undef.h"
+#include "wheel/trie/undef.h"

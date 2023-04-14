@@ -4,3 +4,4 @@
 #include "wheel/optional/header.h"
 #include "wheel/stack/header.h"
 #include "wheel/vec/header.h"
+#include "wheel/trie/header.h"
