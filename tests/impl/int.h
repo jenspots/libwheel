@@ -6,10 +6,7 @@
 #define LIBWHEEL_TYPE  uint64_t
 #define LIBWHEEL_ALIAS int
 
-#include <wheel/wheel.h>
-
-#undef LIBWHEEL_TYPE
-#undef LIBWHEEL_ALIAS
+#include <wheel.h>
 
 int64_t compare_int(const uint64_t a, const uint64_t b) {
     if (a == b) {

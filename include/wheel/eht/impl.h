@@ -1,9 +1,9 @@
+#include "wheel/eht/header.h"
+#include "wheel/interface/header.h"
+#include "wheel/misc/bitops.h"
+#include "wheel/optional/header.h"
+#include "wheel/vec/header.h"
 #include <math.h>
-#include <wheel/misc/bitops.h>
-#include <wheel/types/eht.h>
-#include <wheel/types/interface.h>
-#include <wheel/types/optional.h>
-#include <wheel/types/vec.h>
 
 #ifndef LIBWHEEL_EHT_BUCKET_COUNT
 #define LIBWHEEL_EHT_BUCKET_COUNT 1
@@ -19,9 +19,9 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_KEY_TYPE"
 #endif
 
-#include <wheel/def/optional.h>
-#include <wheel/def/interface.h>
-#include <wheel/def/eht.h>
+#include "wheel/eht/def.h"
+#include "wheel/interface/def.h"
+#include "wheel/optional/def.h"
 
 typedef struct eht {
     ehtb** buckets;
@@ -161,6 +161,6 @@ uint64_t eht_capacity(eht* e) {
     return 1 << (e->bit_count);
 }
 
-#include <wheel/undef/optional.h>
-#include <wheel/undef/interface.h>
-#include <wheel/undef/eht.h>
+#include "wheel/eht/undef.h"
+#include "wheel/interface/undef.h"
+#include "wheel/optional/undef.h"

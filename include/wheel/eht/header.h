@@ -1,4 +1,4 @@
-#include <wheel/def/wheel.h>
+#include "wheel/wheel/def.h"
 
 typedef struct eht eht;
 
@@ -22,4 +22,4 @@ optional ehtb_search(ehtb* bucket, uint64_t hash_value);
 
 optional eht_search(eht* table, LIBWHEEL_TYPE element);
 
-#include <wheel/undef/wheel.h>
+#include "wheel/wheel/undef.h"

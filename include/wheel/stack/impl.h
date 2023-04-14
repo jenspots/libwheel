@@ -1,7 +1,7 @@
-#include <wheel/misc/macros.h>
-#include <wheel/types/optional.h>
-#include <wheel/types/stack.h>
-#include <wheel/types/vec.h>
+#include "header.h"
+#include "wheel/misc/macros.h"
+#include "wheel/optional/header.h"
+#include "wheel/vec/header.h"
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
@@ -9,9 +9,9 @@
 #warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
 #endif
 
-#include <wheel/def/stack.h>
-#include <wheel/def/optional.h>
-#include <wheel/def/vec.h>
+#include "def.h"
+#include "wheel/optional/def.h"
+#include "wheel/vec/def.h"
 
 typedef struct stack {
     vec values;
@@ -40,6 +40,6 @@ optional stack_pop(stack* s) {
     }
 }
 
-#include <wheel/undef/stack.h>
-#include <wheel/undef/optional.h>
-#include <wheel/undef/vec.h>
+#include "undef.h"
+#include "wheel/optional/undef.h"
+#include "wheel/vec/undef.h"

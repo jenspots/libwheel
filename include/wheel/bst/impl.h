@@ -1,10 +1,10 @@
+#include "wheel/bst/header.h"
+#include "wheel/interface/header.h"
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <wheel/types/interface.h>
-#include <wheel/types/bst.h>
 
-#include <wheel/def/wheel.h>
+#include "wheel/wheel/def.h"
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
@@ -181,4 +181,4 @@ bool bst_remove(bst* tree, T element) {
     }
 }
 
-#include <wheel/undef/wheel.h>
+#include "wheel/wheel/undef.h"

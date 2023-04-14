@@ -6,10 +6,7 @@
 #define LIBWHEEL_TYPE  char*
 #define LIBWHEEL_ALIAS string
 
-#include <wheel/wheel.h>
-
-#undef LIBWHEEL_TYPE
-#undef LIBWHEEL_ALIAS
+#include <wheel.h>
 
 int64_t compare_string(const char* a, const char* b) {
     assert(a);

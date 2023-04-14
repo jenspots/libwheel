@@ -1,4 +1,4 @@
-#include <wheel/def/wheel.h>
+#include "wheel/wheel/def.h"
 
 typedef struct vec vec;
 
@@ -26,4 +26,4 @@ vec vec_shallow_clone(vec* v);
 
 vec vec_deep_clone(vec* v);
 
-#include <wheel/undef/wheel.h>
+#include "wheel/wheel/undef.h"

@@ -1,6 +1,6 @@
 #include <stdbool.h>
 
-#include <wheel/def/wheel.h>
+#include "wheel/wheel/def.h"
 
 typedef struct bst bst;
 
@@ -22,4 +22,4 @@ optional bst_search(bst* tree, LIBWHEEL_TYPE element);
 
 bool bst_remove(bst* tree, LIBWHEEL_TYPE element);
 
-#include <wheel/undef/wheel.h>
+#include "wheel/wheel/undef.h"

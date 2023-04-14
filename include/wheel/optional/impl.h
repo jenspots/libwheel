@@ -1,7 +1,7 @@
+#include "wheel/misc/macros.h"
+#include "wheel/optional/header.h"
+#include "wheel/optional/def.h"
 #include <stdbool.h>
-#include <wheel/misc/macros.h>
-#include <wheel/types/optional.h>
-#include <wheel/def/optional.h>
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
@@ -28,4 +28,4 @@ optional optional_empty() {
 }
 
 #undef T
-#include <wheel/undef/optional.h>
+#include "wheel/optional/undef.h"

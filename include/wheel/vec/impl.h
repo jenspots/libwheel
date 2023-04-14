@@ -1,15 +1,15 @@
+#include "header.h"
+#include "wheel/interface/header.h"
+#include "wheel/misc/macros.h"
+#include "wheel/optional/header.h"
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <wheel/misc/macros.h>
-#include <wheel/types/interface.h>
-#include <wheel/types/optional.h>
-#include <wheel/types/vec.h>
 
-#include <wheel/def/optional.h>
-#include <wheel/def/interface.h>
-#include <wheel/def/vec.h>
+#include "def.h"
+#include "wheel/interface/def.h"
+#include "wheel/optional/def.h"
 
 #ifdef LIBWHEEL_TYPE
 #define T LIBWHEEL_TYPE
@@ -164,4 +164,4 @@ vec vec_deep_clone(vec* v) {
     return copy;
 }
 
-#include <wheel/undef/wheel.h>
+#include "wheel/wheel/undef.h"
