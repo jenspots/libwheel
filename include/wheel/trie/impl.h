@@ -17,10 +17,10 @@ typedef struct trie_node {
     const char* skip;
     uint64_t skip_length;
 
-    bool prefix;
+    optional value;
 } trie_node;
 
-bool trie_node_search(trie_node *node, const char *string) {
+optional trie_node_search(trie_node *node, const char *string) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -32,32 +32,32 @@ bool trie_node_search(trie_node *node, const char *string) {
                 if (node->left) {
                     node = node->left;
                 } else {
-                    return false;
+                    return optional_empty();
                 }
             } else {
                 if (node->right) {
                     node = node->right;
                 } else {
-                    return false;
+                    return optional_empty();
                 }
             }
         }
 
         // The path to this node must be the same
         if (strncmp(node->skip, string, node->skip_length) != 0) {
-            return false;
+            return optional_empty();
         }
 
         unsigned char key = string[node->skip_length];
 
         // We've matched the string completely
         if (key == '\0') {
-            return node->prefix;
+            return node->value;
         }
 
         // We cannot go further
         if (!node->next) {
-            return false;
+            return optional_empty();
         }
 
         string += node->skip_length;
@@ -65,7 +65,7 @@ bool trie_node_search(trie_node *node, const char *string) {
     }
 }
 
-void trie_node_branch(trie_node *node, const char *string, uint64_t i) {
+void trie_node_branch(trie_node *node, const char *string, uint64_t i, T value) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -75,14 +75,14 @@ void trie_node_branch(trie_node *node, const char *string, uint64_t i) {
     child->skip = node->skip + i;
     child->skip_length = node->skip_length - i;
     child->next = node->next;
-    child->prefix = node->prefix;
+    child->value = node->value;
 
     // Indien de toe te voegen string leeg is, markeren we bovenste top als
     // prefix.
     if (string[i] == '\0') {
         node->next = child;
         node->skip_length = i;
-        node->prefix = true;
+        node->value = optional_of(value);
         return;
     }
 
@@ -90,12 +90,12 @@ void trie_node_branch(trie_node *node, const char *string, uint64_t i) {
     trie_node* branched = calloc(1, sizeof(trie_node));
     branched->skip = string + i;
     branched->skip_length = strlen(string + i);
-    branched->prefix = true;
+    branched->value = optional_of(value);;
 
     // Pas de skip-lengte aan van de bovenste top.
     node->next = child;
     node->skip_length = i;
-    node->prefix = false;
+    node->value = optional_empty();
 
     // Voeg links of rechts toe.
     if (branched->skip[0] < child->skip[0]) {
@@ -105,7 +105,7 @@ void trie_node_branch(trie_node *node, const char *string, uint64_t i) {
     }
 }
 
-bool trie_node_add(trie_node *node, const char *string) {
+optional trie_node_add(trie_node *node, const char *string, T value) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -121,8 +121,8 @@ bool trie_node_add(trie_node *node, const char *string) {
                     node->left = calloc(1, sizeof(trie_node));
                     node->left->skip = string;
                     node->left->skip_length = strlen(string);
-                    node->left->prefix = true;
-                    return true;
+                    node->left->value = optional_of(value);
+                    return optional_empty();
                 }
             } else {
                 if (node->right) {
@@ -131,8 +131,8 @@ bool trie_node_add(trie_node *node, const char *string) {
                     node->right = calloc(1, sizeof(trie_node));
                     node->right->skip = string;
                     node->right->skip_length = strlen(string);
-                    node->right->prefix = true;
-                    return true;
+                    node->right->value = optional_of(value);
+                    return optional_empty();
                 }
             }
         }
@@ -140,15 +140,15 @@ bool trie_node_add(trie_node *node, const char *string) {
         // Overloop de skip-string en roep node_branch op indien nodig.
         for (int i = 0; i < node->skip_length; ++i) {
             if (string[i] == '\0' || node->skip[i] != string[i]) {
-                trie_node_branch(node, string, i);
-                return true;
+                trie_node_branch(node, string, i, value);
+                return optional_empty();
             }
         }
 
         // Indien de string eindigt in de top, schakel de prefix vlag in.
         if (string[node->skip_length] == '\0') {
-            bool result = !node->prefix;
-            node->prefix = true;
+            optional result = node->value;
+            node->value = optional_of(value);
             return result;
         }
 
@@ -158,8 +158,8 @@ bool trie_node_add(trie_node *node, const char *string) {
             node->next = calloc(1, sizeof(trie_node));
             node->next->skip = string + node->skip_length;
             node->next->skip_length = strlen(string + node->skip_length);
-            node->next->prefix = true;
-            return true;
+            node->next->value = optional_of(value);
+            return optional_empty();
         }
 
         // Analoog aan:
@@ -169,7 +169,7 @@ bool trie_node_add(trie_node *node, const char *string) {
     }
 }
 
-bool trie_node_remove(trie_node **root, trie_node *node, const char *string) {
+optional trie_node_remove(trie_node **root, trie_node *node, const char *string) {
     assert(root);
     assert(*root);
     assert((*root)->skip_length);
@@ -183,29 +183,28 @@ bool trie_node_remove(trie_node **root, trie_node *node, const char *string) {
                 root = &node->left;
                 node = node->left;
             } else {
-                return false;
+                return optional_empty();
             }
         } else {
             if (node->right) {
                 root = &node->right;
                 node = node->right;
             } else {
-                return false;
+                return optional_empty();
             }
         }
     }
 
     // De skip string moet overeen komen.
     if (strncmp(node->skip, string, node->skip_length) != 0) {
-        return false;
+        return optional_empty();
     }
 
     unsigned char key = string[node->skip_length];
 
     // Indien de toe te voegen string eindigt in de huidige top.
     if (key == '\0') {
-        bool result = node->prefix;
-        node->prefix = false;
+        optional result = node->value;
 
         // Indien er geen volgende top is vervangen we de huidige top door
         // het linker- en/of rechterkind.
@@ -230,7 +229,7 @@ bool trie_node_remove(trie_node **root, trie_node *node, const char *string) {
             trie_node *old_next = node->next;
             node->skip = node->next->skip - node->skip_length;
             node->skip_length += node->next->skip_length;
-            node->prefix = node->next->prefix;
+            node->value = node->next->value;
 
             if (node->next->right) {
                 trie_node *tmp = node->next->right;
@@ -250,100 +249,99 @@ bool trie_node_remove(trie_node **root, trie_node *node, const char *string) {
 
     // De te verwijderen string loopt verder langs volgens node->next.
     if (!node->next) {
-        return false;
+        return optional_empty();
     }
 
-    if (trie_node_remove(&node->next, node->next, string + node->skip_length)) {
+    optional recursive = trie_node_remove(&node->next, node->next, string + node->skip_length);
+
+    if (recursive.present) {
         // Indien de huidige top geen prefix is, en node->next geen linker- of
         // rechterkind heeft kunnen we de twee toppen samen voegen.
-        if (!node->prefix && !node->next->left && !node->next->right && node->next) {
+        if (!node->value.present && !node->next->left && !node->next->right && node->next) {
             trie_node *tmp = node->next;
             node->skip = node->next->skip - node->skip_length;
             node->skip_length += node->next->skip_length;
-            node->prefix = node->next->prefix;
+            node->value = node->next->value;
             node->next = node->next->next;
             free(tmp);
         }
-        return true;
     }
-    return false;
+
+    return recursive;
 }
 
 typedef struct trie {
     trie_node* root;
     uint64_t size;
-    bool empty_string;
+    optional empty;
 } trie;
 
 trie* trie_init() {
     return calloc(1, sizeof(trie));
 };
 
-bool trie_search(trie *trie, const char *string) {
+optional trie_search(trie *trie, const char *string) {
     if (string[0] == '\0') {
-        return trie->empty_string;
+        return trie->empty;
     }
 
     if (trie->root == NULL) {
-        return false;
+        return optional_empty();
     }
 
     return trie_node_search(trie->root, string);
 }
 
-bool trie_add(trie *trie, const char *string) {
+optional trie_add(trie *trie, const char *string, T value) {
     if (string[0] == '\0') {
-        if (!trie->empty_string) {
-            trie->empty_string = true;
+        optional previous = trie->empty;
+        trie->empty = optional_of(value);
+        if (!previous.present) {
             trie->size += 1;
-            return true;
-        } else {
-            return false;
         }
+        return previous;
     }
 
     if (trie->root == NULL) {
         trie->root = calloc(1, sizeof(trie_node));
         trie->root->skip = string;
         trie->root->skip_length = strlen(trie->root->skip);
-        trie->root->prefix = true;
+        trie->root->value = optional_of(value);
         trie->size += 1;
-        return true;
+        return optional_empty();
     }
 
-    if (trie_node_add(trie->root, string)) {
+    optional previous = trie_node_add(trie->root, string, value);
+    if (!previous.present) {
         trie->size += 1;
-        return true;
     } else {
-        return false;
     }
+    return previous;
 }
 
-bool trie_remove(trie *trie, const char *string) {
+optional trie_remove(trie *trie, const char *string) {
     assert(trie);
     assert(string);
 
     if (string[0] == '\0') {
-        if (trie->empty_string) {
-            trie->empty_string = false;
+        optional result = trie->empty;
+        if (result.present) {
             trie->size -= 1;
-            return true;
-        } else {
-            return false;
+            trie->empty.present = false;
         }
+        return result;
     }
 
     if (trie->root == NULL) {
-        assert((trie->empty_string && trie->size == 1) || (!trie->empty_string && trie->size == 0));
-        return false;
+        assert((trie->empty.present && trie->size == 1) || (!trie->empty.present && trie->size == 0));
+        return optional_empty();
     }
 
-    if (trie_node_remove(&trie->root, trie->root, string)) {
+    optional result = trie_node_remove(&trie->root, trie->root, string);
+    if (result.present) {
         trie->size -= 1;
-        return true;
-    } else {
-        return false;
     }
+    return result;
 }
 
 uint64_t trie_size(trie *trie) {
