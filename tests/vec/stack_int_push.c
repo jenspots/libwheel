@@ -1,4 +1,8 @@
-#include "impl/int.h"
+/*
+ * Copyright (c) 2023.
+ */
+
+#include "../impl/int.h"
 #include <assert.h>
 
 int main() {
@@ -13,4 +17,6 @@ int main() {
         assert(o.present);
         assert(o.value == i);
     }
+
+    stack_int_delete(&s);
 }

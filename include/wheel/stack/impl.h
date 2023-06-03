@@ -40,6 +40,10 @@ optional stack_pop(stack* s) {
     }
 }
 
+void stack_delete(stack* s) {
+    vec_delete(&s->values);
+}
+
 #include "undef.h"
 #include "wheel/optional/undef.h"
 #include "wheel/vec/undef.h"
