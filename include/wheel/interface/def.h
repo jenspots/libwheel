@@ -1,6 +1,6 @@
 #include "wheel/misc/macros.h"
 
-#define compare LIBWHEEL_PREFIX(compare)
-#define hash    LIBWHEEL_PREFIX(hash)
-#define destroy LIBWHEEL_PREFIX(destroy)
-#define clone   LIBWHEEL_PREFIX(clone)
+#define compare LIBWHEEL_NAMESPACE(compare)
+#define hash    LIBWHEEL_NAMESPACE(hash)
+#define destroy LIBWHEEL_NAMESPACE(destroy)
+#define clone   LIBWHEEL_NAMESPACE(clone)
