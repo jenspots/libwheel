@@ -1,6 +1,6 @@
 #include "wheel/misc/macros.h"
 
-#define bst             LIBWHEEL_NAMESPACE(bst)
+#define bst             LIBWHEEL_APPEND(bst)
 #define bst_init        LIBWHEEL_DEFINE(bst, init)
 #define bst_delete      LIBWHEEL_DEFINE(bst, delete)
 #define bst_insert      LIBWHEEL_DEFINE(bst, insert)

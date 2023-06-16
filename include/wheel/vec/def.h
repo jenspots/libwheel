@@ -1,6 +1,6 @@
 #include "wheel/misc/macros.h"
 
-#define vec               LIBWHEEL_NAMESPACE(vec)
+#define vec               LIBWHEEL_APPEND(vec)
 #define vec_init          LIBWHEEL_DEFINE(vec, init)
 #define vec_with_cap      LIBWHEEL_DEFINE(vec, with_cap)
 #define vec_delete        LIBWHEEL_DEFINE(vec, delete)

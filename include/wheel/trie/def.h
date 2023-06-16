@@ -1,6 +1,6 @@
 #include "wheel/misc/macros.h"
 
-#define trie         LIBWHEEL_NAMESPACE(trie)
+#define trie         LIBWHEEL_APPEND(trie)
 #define trie_init    LIBWHEEL_DEFINE(trie, init)
 #define trie_destroy LIBWHEEL_DEFINE(trie, destroy)
 #define trie_search  LIBWHEEL_DEFINE(trie, search)
