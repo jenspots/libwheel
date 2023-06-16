@@ -6,4 +6,5 @@
 #include "wheel/eht/impl.h"
 #include "wheel/stack/impl.h"
 #include "wheel/trie/impl.h"
+#include "wheel/linked_list/impl.h"
 // clang-format on
