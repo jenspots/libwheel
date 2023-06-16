@@ -8,6 +8,7 @@
 #include <string.h>
 
 #include "def.h"
+#include "wheel/misc/bitops.h"
 #include "wheel/interface/def.h"
 #include "wheel/optional/def.h"
 
@@ -26,13 +27,15 @@
 #endif
 
 typedef struct vec {
-    optional* values;
+    T* values;
+    vec_bit present;
     uint64_t size;
 } vec;
 
 vec vec_init() {
     vec v = {
-        .values = calloc(LIBWHEEL_INITIAL_SIZE, sizeof(optional)),
+        .values = malloc(LIBWHEEL_INITIAL_SIZE * sizeof(T)),
+        .present = vec_bit_with_cap(LIBWHEEL_INITIAL_SIZE),
         .size = LIBWHEEL_INITIAL_SIZE,
     };
     assert(v.values);
@@ -42,7 +45,8 @@ vec vec_init() {
 vec vec_with_cap(uint64_t capacity) {
     assert(capacity > 0);
     vec v = {
-        .values = calloc(capacity, sizeof(optional)),
+        .values = malloc(capacity * sizeof(T)),
+        .present = vec_bit_with_cap(capacity),
         .size = capacity,
     };
     assert(v.values);
@@ -52,23 +56,31 @@ vec vec_with_cap(uint64_t capacity) {
 optional vec_get(vec* v, uint64_t index) {
     assert(v);
 
-    if (index < v->size) {
-        return v->values[index];
+    if (index >= v->size) {
+        return optional_empty();
     }
 
-    return optional_empty();
+    if (!vec_bit_get(&v->present, index)) {
+        return optional_empty();
+    }
+
+    return optional_of(v->values[index]);
 }
 
 optional vec_pop(vec* v, uint64_t index) {
     assert(v);
 
-    if (index < v->size) {
-        optional result = v->values[index];
-        v->values[index] = optional_empty();
-        return result;
+    if (index >= v->size) {
+        return optional_empty();
     }
 
-    return optional_empty();
+    if (!vec_bit_get(&v->present, index)) {
+        return optional_empty();
+    }
+
+    optional result = optional_of(v->values[index]);
+    vec_bit_set(&v->present, index, false);
+    return result;
 }
 
 void vec_delete(vec* v) {
@@ -76,19 +88,20 @@ void vec_delete(vec* v) {
     assert(v->values);
 
     for (uint64_t i = 0; i < v->size; ++i) {
-        optional element = vec_get(v, i);
-        if (element.present) {
-            destroy(element.value);
+        if (vec_bit_get(&v->present, i)) {
+            destroy(v->values[i]);
         }
     }
+
     free(v->values);
+    vec_bit_delete(&v->present);
 }
 
 void vec_grow(vec* v) {
     assert(v);
     assert(v->values);
     v->size *= LIBWHEEL_VECTOR_SCALAR;
-    v->values = realloc(v->values, sizeof(optional) * v->size);
+    v->values = realloc(v->values, sizeof(T) * v->size);
     assert(v->values);
 }
 
@@ -99,14 +112,14 @@ void vec_set(vec* v, uint64_t index, T value) {
         vec_grow(v);
     }
 
-    v->values[index] = optional_of(value);
+    vec_bit_set(&v->present, index, true);
+    v->values[index] = value;
 }
 
 void vec_foreach(vec* v, void (*f)(T)) {
     for (uint64_t i = 0; i < v->size; ++i) {
-        optional element = vec_get(v, i);
-        if (element.present) {
-            f(element.value);
+        if (vec_bit_get(&v->present, i)) {
+            f(v->values[i]);
         }
     }
 }
@@ -115,9 +128,8 @@ void vec_map(vec* v, T (*f)(T)) {
     assert(v);
 
     for (uint64_t i = 0; i < v->size; ++i) {
-        optional element = vec_get(v, i);
-        if (element.present) {
-            v->values[i] = optional_of(f(element.value));
+        if (vec_bit_get(&v->present, i)) {
+            v->values[i] = f(v->values[i]);
         }
     }
 }
@@ -126,10 +138,9 @@ void vec_filter(vec* v, bool (*f)(T)) {
     assert(v);
 
     for (uint64_t i = 0; i < v->size; ++i) {
-        optional element = vec_get(v, i);
-        if (element.present && !f(element.value)) {
-            destroy(element.value);
-            v->values[i] = optional_empty();
+        if (vec_bit_get(&v->present, i) && !f(v->values[i])) {
+            vec_bit_set(&v->present, i, false);
+            destroy(v->values[i]);
         }
     }
 }
@@ -137,6 +148,7 @@ void vec_filter(vec* v, bool (*f)(T)) {
 vec vec_shallow_clone(vec* v) {
     vec copy = {
         .values = malloc(sizeof(T) * v->size),
+        .present = vec_bit_clone(&v->present),
         .size = v->size,
     };
 
@@ -149,15 +161,13 @@ vec vec_shallow_clone(vec* v) {
 vec vec_deep_clone(vec* v) {
     vec copy = {
         .values = malloc(sizeof(T) * v->size),
+        .present = vec_bit_clone(&v->present),
         .size = v->size,
     };
 
     for (int i = 0; i < v->size; ++i) {
-        optional element = vec_get(v, i);
-        if (element.present) {
-            copy.values[i] = optional_of(clone(element.value));
-        } else {
-            copy.values[i] = element;
+        if (vec_bit_get(&v->present, i)) {
+            copy.values[i] = clone(v->values[i]);
         }
     }
 

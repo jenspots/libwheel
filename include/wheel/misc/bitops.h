@@ -2,9 +2,10 @@
 #define LIBWHEEL_BITOPS_H
 
 #include <limits.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define N_BITS(i) (i == 0 ? 0 : i == 64 ? UINT_MAX \
                                         : ((uint64_t)1 << (uint64_t)(i)) - 1)
@@ -84,6 +85,16 @@ void vec_bit_set(vec_bit* v, uint64_t index, bool value) {
     } else {
         v->values[index / 64] &= ~NTH_BIT(index % 64);
     }
+}
+
+vec_bit vec_bit_clone(vec_bit* v) {
+    uint64_t length = (v->size / 64) + (v->size % 64 == 0 ? 0 : 1);
+    vec_bit copy = {
+        .values = malloc(length * sizeof(uint64_t)),
+        .size = v->size,
+    };
+    memcpy(copy.values, v->values, length * sizeof(uint64_t));
+    return copy;
 }
 
 #endif // LIBWHEEL_BITOPS_H
