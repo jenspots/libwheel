@@ -1,2 +1,11 @@
 #undef ll
 #undef ll_node
+#undef ll_init
+#undef ll_head
+#undef ll_tail
+#undef ll_get
+#undef ll_prepend
+#undef ll_append
+#undef ll_insert_at
+#undef ll_set
+#undef ll_delete
