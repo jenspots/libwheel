@@ -1,5 +1,5 @@
+#include "../impl/int.h"
 #include <assert.h>
-#include "impl/int.h"
 
 int main() {
     eht_int* t = eht_int_init();

@@ -6,7 +6,7 @@
 #define LIBWHEEL_TYPE vec_int
 #define LIBWHEEL_ALIAS vec_int
 
-#include <wheel.h>
+#include "wheel.h"
 
 int64_t vec_int_compare(const vec_int a, const vec_int b) {
     return 0;

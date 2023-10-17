@@ -1,4 +1,4 @@
-#include "impl/int.h"
+#include "../impl/int.h"
 #include <assert.h>
 
 int main(int argc, char** argv) {
