@@ -148,7 +148,7 @@ vec vec_shallow_clone(vec* v) {
     return copy;
 }
 
-vec vec_deep_clone(vec* v) {
+vec vec_deep_clone(const vec* v) {
     vec copy = {
         .values = malloc(sizeof(LIBWHEEL_TYPE) * v->size),
         .present = vec_bit_clone(&v->present),

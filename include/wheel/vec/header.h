@@ -24,6 +24,6 @@ void vec_filter(vec* v, bool (*f)(LIBWHEEL_TYPE));
 
 vec vec_shallow_clone(vec* v);
 
-vec vec_deep_clone(vec* v);
+vec vec_deep_clone(const vec* v);
 
 #include "wheel/wheel/undef.h"

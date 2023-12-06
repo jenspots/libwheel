@@ -36,7 +36,7 @@ vec_bit vec_bit_init() {
     return v;
 }
 
-vec_bit vec_bit_with_cap(uint64_t capacity) {
+vec_bit vec_bit_with_cap(const uint64_t capacity) {
     assert(capacity > 0);
 
     // How long the array must be.
@@ -49,7 +49,7 @@ vec_bit vec_bit_with_cap(uint64_t capacity) {
     return v;
 }
 
-bool vec_bit_get(vec_bit* v, uint64_t index) {
+bool vec_bit_get(const vec_bit* v, const uint64_t index) {
     assert(v);
 
     if (index > v->size) {
@@ -87,7 +87,7 @@ void vec_bit_set(vec_bit* v, uint64_t index, bool value) {
     }
 }
 
-vec_bit vec_bit_clone(vec_bit* v) {
+vec_bit vec_bit_clone(const vec_bit* v) {
     uint64_t length = (v->size / 64) + (v->size % 64 == 0 ? 0 : 1);
     vec_bit copy = {
         .values = malloc(length * sizeof(uint64_t)),
