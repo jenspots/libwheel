@@ -1,17 +1,5 @@
 #include "header.h"
-#include "wheel/misc/macros.h"
-#include "wheel/optional/header.h"
-#include "wheel/vec/header.h"
-
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
-#endif
-
-#include "def.h"
-#include "wheel/optional/def.h"
-#include "wheel/vec/def.h"
+#include "wheel/wheel/def.h"
 
 typedef struct stack {
     vec values;
@@ -25,7 +13,7 @@ stack stack_init() {
     };
 }
 
-void stack_push(stack* s, T element) {
+void stack_push(stack* s, LIBWHEEL_TYPE element) {
     vec_set(&s->values, s->index, element);
     s->index += 1;
 }
@@ -44,6 +32,4 @@ void stack_delete(stack* s) {
     vec_delete(&s->values);
 }
 
-#include "undef.h"
-#include "wheel/optional/undef.h"
-#include "wheel/vec/undef.h"
+#include "wheel/wheel/undef.h"

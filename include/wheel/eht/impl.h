@@ -13,15 +13,8 @@
 #define LIBWHEEL_EHT_BUCKET_SIZE 2
 #endif
 
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_KEY_TYPE"
-#endif
-
-#include "wheel/eht/def.h"
-#include "wheel/interface/def.h"
-#include "wheel/optional/def.h"
+#include "header.h"
+#include "wheel/wheel/def.h"
 
 typedef struct eht {
     ehtb** buckets;
@@ -104,11 +97,11 @@ void eht_split(eht* table, uint64_t index) {
     }
 }
 
-uint64_t eht_index(eht* table, T element) {
+uint64_t eht_index(eht* table, LIBWHEEL_TYPE element) {
     return TAIL(table->bit_count, hash(element));
 }
 
-bool eht_insert(eht* table, T element) {
+bool eht_insert(eht* table, LIBWHEEL_TYPE element) {
     while (true) {
         uint64_t hash_value = hash(element);
         uint64_t bucket_index = eht_index(table, element);
@@ -151,7 +144,7 @@ optional ehtb_search(ehtb* bucket, uint64_t hash_value) {
     return optional_empty();
 }
 
-optional eht_search(eht* table, T element) {
+optional eht_search(eht* table, LIBWHEEL_TYPE element) {
     ehtb* bucket = table->buckets[eht_index(table, element)];
     assert(bucket);
     return ehtb_search(bucket, hash(element));
@@ -161,6 +154,4 @@ uint64_t eht_capacity(eht* e) {
     return 1 << (e->bit_count);
 }
 
-#include "wheel/eht/undef.h"
-#include "wheel/interface/undef.h"
-#include "wheel/optional/undef.h"
+#include "wheel/wheel/undef.h"

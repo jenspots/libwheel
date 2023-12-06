@@ -1,14 +1,7 @@
 #include <stdint.h>
 
-#include <wheel/wheel/header.h>
-
-#include <wheel/wheel/def.h>
-
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
-#endif
+#include "header.h"
+#include "wheel/wheel/def.h"
 
 typedef struct ll {
     ll_node* head;
@@ -19,7 +12,7 @@ typedef struct ll {
 typedef struct ll_node {
     ll_node* prev;
     ll_node* next;
-    T element;
+    LIBWHEEL_TYPE element;
 } ll_node;
 
 ll ll_init() {
@@ -58,7 +51,7 @@ optional ll_get(ll *l, uint64_t index) {
     return optional_of(current->element);
 }
 
-void ll_prepend(ll *l, T element) {
+void ll_prepend(ll *l, LIBWHEEL_TYPE element) {
     ll_node* node = malloc(sizeof(ll_node));
     node->prev = NULL;
     node->element = element;
@@ -81,7 +74,7 @@ void ll_prepend(ll *l, T element) {
     l->size += 1;
 }
 
-void ll_append(ll *l, T element) {
+void ll_append(ll *l, LIBWHEEL_TYPE element) {
     ll_node* node = malloc(sizeof(ll_node));
     node->prev = NULL;
     node->element = element;
@@ -104,7 +97,7 @@ void ll_append(ll *l, T element) {
     l->size += 1;
 }
 
-void ll_insert_at(ll *l, uint64_t index, T element) {
+void ll_insert_at(ll *l, uint64_t index, LIBWHEEL_TYPE element) {
     // Special cases, makes the rest a bit simpler.
     if (index == 0) {
         ll_prepend(l, element);
@@ -133,7 +126,7 @@ void ll_insert_at(ll *l, uint64_t index, T element) {
     l->size += 1;
 }
 
-void ll_set(ll* l, uint64_t index, T value) {
+void ll_set(ll* l, uint64_t index, LIBWHEEL_TYPE value) {
     ll_node* current = l->head;
     ll_node* next = NULL;
 
@@ -159,4 +152,4 @@ void ll_delete(ll l) {
     }
 }
 
-#include <wheel/wheel/undef.h>
+#include "wheel/wheel/undef.h"

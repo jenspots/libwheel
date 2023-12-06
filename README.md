@@ -13,11 +13,11 @@ One of the provided datastructures is `optional`, which either contains a value 
 ```c
 typedef struct optional {
     bool present;
-    T value;
+    LIBWHEEL_TYPE value;
 } optional;
 ```
 
-Here, the type `T` is a generic. We can instantiate it to a string, in essence a `char*` in the C language. When your application uses Wheel, you may define the header file `string.h` as shown below.
+Here, the type `LIBWHEEL_TYPE` is a generic. We can instantiate it to a string, in essence a `char*` in the C language. When your application uses Wheel, you may define the header file `string.h` as shown below.
 
 ```c
 #ifndef STRING_H
@@ -33,7 +33,7 @@ Here, the type `T` is a generic. We can instantiate it to a string, in essence a
 
 If you are unfamiliar with the `#ifndef STRING_H` convention, this simply makes sure this specific header file isn't send to the compiler more than once. It is not in any way specific to the library itself. 
 
-We define `LIBWHEEL_TYPE`, which is what the preprocessor will fill in for every instance of `T` in `<wheel/optional/impl.h>`. Here, we want it to be `char*`. 
+We define `LIBWHEEL_TYPE`, which is what the preprocessor will fill in for every instance of `LIBWHEEL_TYPE` in `<wheel/optional/impl.h>`. Here, we want it to be `char*`. 
 
 The name of a struct cannot contain asterisks, so a type definition like `struct optional_char*` would be invalid. This means will also have to pass a second argument which will dictate the suffix given to every function and struct, since those still have to be unique. This is where `LIBWHEEL_ALIAS` comes in, here mapped to `string`. The resulting type will be `optional_string`.
 

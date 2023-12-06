@@ -1,16 +1,9 @@
-#include "wheel/bst/header.h"
-#include "wheel/interface/header.h"
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "header.h"
 #include "wheel/wheel/def.h"
-
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_KEY_TYPE"
-#endif
 
 typedef struct bst {
     bst_node* root;
@@ -21,10 +14,10 @@ typedef struct bst_node {
     bst_node* parent;
     bst_node* left;
     bst_node* right;
-    T element;
+    LIBWHEEL_TYPE element;
 } bst_node;
 
-bst_node* bst_node_init(T element) {
+bst_node* bst_node_init(LIBWHEEL_TYPE element) {
     bst_node* result = calloc(1, sizeof(bst_node));
     result->element = element;
     return result;
@@ -100,7 +93,7 @@ void bst_delete(bst* tree) {
     free(tree);
 }
 
-bool bst_insert(bst* tree, T element) {
+bool bst_insert(bst* tree, LIBWHEEL_TYPE element) {
     assert(tree);
 
     bst_node* current = tree->root;
@@ -136,7 +129,7 @@ bool bst_insert(bst* tree, T element) {
     }
 }
 
-optional bst_search(bst* tree, T element) {
+optional bst_search(bst* tree, LIBWHEEL_TYPE element) {
     assert(tree);
 
     bst_node* current = tree->root;
@@ -160,7 +153,7 @@ optional bst_search(bst* tree, T element) {
     }
 }
 
-bool bst_remove(bst* tree, T element) {
+bool bst_remove(bst* tree, LIBWHEEL_TYPE element) {
     assert(tree);
 
     bst_node* current = tree->root;

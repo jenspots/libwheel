@@ -1,22 +1,9 @@
-#include "header.h"
-#include "wheel/interface/header.h"
-#include "wheel/misc/macros.h"
-#include "wheel/optional/header.h"
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "def.h"
 #include "wheel/misc/bitops.h"
-#include "wheel/interface/def.h"
-#include "wheel/optional/def.h"
-
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
-#endif
 
 #ifndef LIBWHEEL_INITIAL_SIZE
 #define LIBWHEEL_INITIAL_SIZE 32
@@ -26,15 +13,18 @@
 #define LIBWHEEL_VECTOR_SCALAR 2
 #endif
 
+#include "header.h"
+#include "wheel/wheel/def.h"
+
 typedef struct vec {
-    T* values;
+    LIBWHEEL_TYPE* values;
     vec_bit present;
     uint64_t size;
 } vec;
 
 vec vec_init() {
     vec v = {
-        .values = malloc(LIBWHEEL_INITIAL_SIZE * sizeof(T)),
+        .values = malloc(LIBWHEEL_INITIAL_SIZE * sizeof(LIBWHEEL_TYPE)),
         .present = vec_bit_with_cap(LIBWHEEL_INITIAL_SIZE),
         .size = LIBWHEEL_INITIAL_SIZE,
     };
@@ -45,7 +35,7 @@ vec vec_init() {
 vec vec_with_cap(uint64_t capacity) {
     assert(capacity > 0);
     vec v = {
-        .values = malloc(capacity * sizeof(T)),
+        .values = malloc(capacity * sizeof(LIBWHEEL_TYPE)),
         .present = vec_bit_with_cap(capacity),
         .size = capacity,
     };
@@ -101,11 +91,11 @@ void vec_grow(vec* v) {
     assert(v);
     assert(v->values);
     v->size *= LIBWHEEL_VECTOR_SCALAR;
-    v->values = realloc(v->values, sizeof(T) * v->size);
+    v->values = realloc(v->values, sizeof(LIBWHEEL_TYPE) * v->size);
     assert(v->values);
 }
 
-void vec_set(vec* v, uint64_t index, T value) {
+void vec_set(vec* v, uint64_t index, LIBWHEEL_TYPE value) {
     assert(v);
 
     while (index >= v->size) {
@@ -116,7 +106,7 @@ void vec_set(vec* v, uint64_t index, T value) {
     v->values[index] = value;
 }
 
-void vec_foreach(vec* v, void (*f)(T)) {
+void vec_foreach(vec* v, void (*f)(LIBWHEEL_TYPE)) {
     for (uint64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
             f(v->values[i]);
@@ -124,7 +114,7 @@ void vec_foreach(vec* v, void (*f)(T)) {
     }
 }
 
-void vec_map(vec* v, T (*f)(T)) {
+void vec_map(vec* v, LIBWHEEL_TYPE (*f)(LIBWHEEL_TYPE)) {
     assert(v);
 
     for (uint64_t i = 0; i < v->size; ++i) {
@@ -134,7 +124,7 @@ void vec_map(vec* v, T (*f)(T)) {
     }
 }
 
-void vec_filter(vec* v, bool (*f)(T)) {
+void vec_filter(vec* v, bool (*f)(LIBWHEEL_TYPE)) {
     assert(v);
 
     for (uint64_t i = 0; i < v->size; ++i) {
@@ -147,20 +137,20 @@ void vec_filter(vec* v, bool (*f)(T)) {
 
 vec vec_shallow_clone(vec* v) {
     vec copy = {
-        .values = malloc(sizeof(T) * v->size),
+        .values = malloc(sizeof(LIBWHEEL_TYPE) * v->size),
         .present = vec_bit_clone(&v->present),
         .size = v->size,
     };
 
     assert(copy.values);
-    memcpy(copy.values, v->values, v->size * sizeof(T));
+    memcpy(copy.values, v->values, v->size * sizeof(LIBWHEEL_TYPE));
 
     return copy;
 }
 
 vec vec_deep_clone(vec* v) {
     vec copy = {
-        .values = malloc(sizeof(T) * v->size),
+        .values = malloc(sizeof(LIBWHEEL_TYPE) * v->size),
         .present = vec_bit_clone(&v->present),
         .size = v->size,
     };

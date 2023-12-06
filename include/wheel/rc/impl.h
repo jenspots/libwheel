@@ -1,23 +1,15 @@
-#include "header.h"
-#include "wheel/interface/header.h"
 #include <stdlib.h>
+#include "wheel/interface/header.h"
 
-#include "def.h"
-#include "wheel/interface/def.h"
-#include "wheel/optional/def.h"
-
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
-#endif
+#include "header.h"
+#include "wheel/wheel/def.h"
 
 typedef struct rc {
     uint64_t *counter;
-    T value;
+    LIBWHEEL_TYPE value;
 } rc;
 
-rc rc_init(T value) {
+rc rc_init(LIBWHEEL_TYPE value) {
     rc result;
 
     // Initialize the counter to one.
@@ -48,3 +40,5 @@ void rc_delete(rc r) {
         destroy(r.value);
     }
 }
+
+#include "wheel/wheel/undef.h"

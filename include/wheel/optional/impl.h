@@ -1,20 +1,14 @@
-#include "wheel/misc/macros.h"
-#include "wheel/optional/header.h"
-#include "wheel/optional/def.h"
 #include <stdbool.h>
 
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
-#endif
+#include "header.h"
+#include "wheel/wheel/def.h"
 
 typedef struct optional {
     bool present;
-    T value;
+    LIBWHEEL_TYPE value;
 } optional;
 
-optional optional_of(T value) {
+optional optional_of(LIBWHEEL_TYPE value) {
     optional result;
     result.present = true;
     result.value = value;
@@ -27,5 +21,4 @@ optional optional_empty() {
     return result;
 }
 
-#undef T
-#include "wheel/optional/undef.h"
+#include "wheel/wheel/undef.h"

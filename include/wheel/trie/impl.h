@@ -1,13 +1,7 @@
 #include <stdbool.h>
-#include <wheel/wheel/header.h>
 
-#include <wheel/wheel/def.h>
-
-#ifdef LIBWHEEL_TYPE
-#define T LIBWHEEL_TYPE
-#else
-#warning "MACRO NOT DEFINED: LIBWHEEL_TYPE"
-#endif
+#include "header.h"
+#include "wheel/wheel/def.h"
 
 typedef struct trie_node {
     trie_node* left;
@@ -65,7 +59,7 @@ optional trie_node_search(trie_node *node, const char *string) {
     }
 }
 
-void trie_node_branch(trie_node *node, const char *string, uint64_t i, T value) {
+void trie_node_branch(trie_node *node, const char *string, uint64_t i, LIBWHEEL_TYPE value) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -105,7 +99,7 @@ void trie_node_branch(trie_node *node, const char *string, uint64_t i, T value) 
     }
 }
 
-optional trie_node_add(trie_node *node, const char *string, T value) {
+optional trie_node_add(trie_node *node, const char *string, LIBWHEEL_TYPE value) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -292,7 +286,7 @@ optional trie_search(trie *trie, const char *string) {
     return trie_node_search(trie->root, string);
 }
 
-optional trie_add(trie *trie, const char *string, T value) {
+optional trie_add(trie *trie, const char *string, LIBWHEEL_TYPE value) {
     if (string[0] == '\0') {
         optional previous = trie->empty;
         trie->empty = optional_of(value);
@@ -348,4 +342,4 @@ uint64_t trie_size(trie *trie) {
     return trie->size;
 }
 
-#include <wheel/wheel/undef.h>
+#include "wheel/wheel/undef.h"

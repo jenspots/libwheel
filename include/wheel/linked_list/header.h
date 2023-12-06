@@ -12,13 +12,13 @@ optional ll_tail(ll *l);
 
 optional ll_get(ll *l, uint64_t index);
 
-void ll_prepend(ll *l, T element);
+void ll_prepend(ll *l, LIBWHEEL_TYPE element);
 
-void ll_append(ll *l, T element);
+void ll_append(ll *l, LIBWHEEL_TYPE element);
 
-void ll_insert_at(ll *l, uint64_t index, T element);
+void ll_insert_at(ll *l, uint64_t index, LIBWHEEL_TYPE element);
 
-void ll_set(ll* l, uint64_t index, T value);
+void ll_set(ll* l, uint64_t index, LIBWHEEL_TYPE value);
 
 void ll_delete(ll l);
 
