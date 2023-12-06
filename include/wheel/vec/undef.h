@@ -12,3 +12,4 @@
 #undef vec_map
 #undef vec_filter
 #undef vec_shallow_clone
+#undef vec_deep_clone
