@@ -17,6 +17,11 @@ char* string_trait_shallow_copy(const char* value) {
     return result;
 }
 
+#define LIBWHEEL_TRAIT_DEEP_COPY
+char* string_trait_deep_copy(const char* value) {
+    return string_trait_shallow_copy(value);
+}
+
 #define LIBWHEEL_TRAIT_COMPARE
 int64_t string_trait_compare(const char* a, const char* b) {
     assert(a);
@@ -46,11 +51,5 @@ void string_trait_destroy(char* value) {
 }
 
 #include <wheel.h>
-
-char* string_clone(const char* value) {
-    char* result = strdup(value);
-    assert(result);
-    return result;
-}
 
 #endif // LIBWHEEL_STRING_H

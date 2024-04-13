@@ -18,15 +18,16 @@ vec_int vec_int_trait_shallow_copy(const vec_int v) {
     return result;
 }
 
+#define LIBWHEEL_TRAIT_DEEP_COPY
+vec_int vec_int_trait_deep_copy(const vec_int v) {
+    return vec_int_trait_shallow_copy(v);
+}
+
 #define LIBWHEEL_TRAIT_DESTROY
 void vec_int_trait_destroy(vec_int v) {
     vec_int_destroy(&v);
 }
 
 #include "wheel.h"
-
-vec_int vec_int_clone(const vec_int v) {
-    return vec_int_deep_clone(&v);
-}
 
 #endif

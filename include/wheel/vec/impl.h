@@ -170,20 +170,27 @@ void vec_filter(vec* v, bool (*f)(LIBWHEEL_TYPE)) {
     }
 }
 
-vec vec_shallow_clone(vec* v) {
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+vec vec_shallow_copy(vec* this) {
     vec copy = {
-        .values = malloc(sizeof(LIBWHEEL_TYPE) * v->size),
-        .present = vec_bit_clone(&v->present),
-        .size = v->size,
+        .values = malloc(sizeof(LIBWHEEL_TYPE) * this->size),
+        .present = vec_bit_clone(&this->present),
+        .size = this->size,
     };
-
     assert(copy.values);
-    memcpy(copy.values, v->values, v->size * sizeof(LIBWHEEL_TYPE));
+
+    for (int i = 0; i < this->size; ++i) {
+        if (vec_bit_get(&this->present, i)) {
+            copy.values[i] = trait_shallow_copy(this->values[i]);
+        }
+    }
 
     return copy;
 }
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
 
-vec vec_deep_clone(const vec* v) {
+#ifdef LIBWHEEL_TRAIT_DEEP_COPY
+vec vec_deep_copy(const vec* v) {
     vec copy = {
         .values = malloc(sizeof(LIBWHEEL_TYPE) * v->size),
         .present = vec_bit_clone(&v->present),
@@ -192,12 +199,13 @@ vec vec_deep_clone(const vec* v) {
 
     for (int i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
-            copy.values[i] = clone(v->values[i]);
+            copy.values[i] = trait_deep_copy(v->values[i]);
         }
     }
 
     return copy;
 }
+#endif // LIBWHEEL_TRAIT_DEEP_COPY
 
 #ifdef LIBWHEEL_TRAIT_SERIALIZE_JSON
 uint64_t vec_serialize_json(const vec* v, char* target) {

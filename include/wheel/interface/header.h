@@ -13,11 +13,12 @@ uint64_t trait_hash(const LIBWHEEL_TYPE);
 #endif
 void trait_destroy(LIBWHEEL_TYPE);
 
-
-LIBWHEEL_TYPE clone(const LIBWHEEL_TYPE);
-
 #ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
 LIBWHEEL_TYPE trait_shallow_copy(const LIBWHEEL_TYPE);
+#endif
+
+#ifdef LIBWHEEL_TRAIT_DEEP_COPY
+LIBWHEEL_TYPE trait_deep_copy(const LIBWHEEL_TYPE);
 #endif
 
 #ifdef LIBWHEEL_TRAIT_STRINGIFY

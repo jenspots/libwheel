@@ -14,6 +14,6 @@
 #undef vec_free_type
 #undef vec_map
 #undef vec_filter
-#undef vec_shallow_clone
-#undef vec_deep_clone
+#undef vec_shallow_copy
+#undef vec_deep_copy
 #undef vec_serialize_json

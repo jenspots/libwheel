@@ -25,6 +25,11 @@ uint64_t int_trait_shallow_copy(const uint64_t t) {
     return t;
 }
 
+#define LIBWHEEL_TRAIT_DEEP_COPY
+uint64_t int_trait_deep_copy(const uint64_t t) {
+    return t;
+}
+
 #define LIBWHEEL_TRAIT_HASHABLE
 uint64_t int_trait_hash(const uint64_t t) {
     return t;
@@ -52,9 +57,5 @@ void int_trait_destroy(const uint64_t t) {
 }
 
 #include <wheel.h>
-
-uint64_t int_clone(const uint64_t t) {
-    return t;
-}
 
 #endif // LIBWHEEL_INT_H

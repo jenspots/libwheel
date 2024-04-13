@@ -84,9 +84,12 @@ void vec_map(vec* v, LIBWHEEL_TYPE (*f)(LIBWHEEL_TYPE));
 
 void vec_filter(vec* v, bool (*f)(LIBWHEEL_TYPE));
 
-vec vec_shallow_clone(vec* v);
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+vec vec_shallow_copy(vec* this);
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
 
-vec vec_deep_clone(const vec* v);
-
+#ifdef LIBWHEEL_TRAIT_DEEP_COPY
+vec vec_deep_copy(const vec* v);
+#endif // LIBWHEEL_TRAIT_DEEP_COPY
 
 #include "wheel/wheel/undef.h"
