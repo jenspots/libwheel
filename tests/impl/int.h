@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
 #define LIBWHEEL_TYPE  uint64_t
 #define LIBWHEEL_ALIAS int
@@ -31,13 +32,13 @@ uint64_t int_trait_hash(const uint64_t t) {
 
 #define LIBWHEEL_TRAIT_STRINGIFY
 uint64_t int_trait_stringify(char* target, const uint64_t t) {
-    const int size = snprintf(NULL, 0, "%llu", t);
+    const int size = snprintf(NULL, 0, "%" PRIu64, t);
 
     if (target == NULL) {
         return size;
     }
 
-    return snprintf(target, size + 1, "%llu", t);
+    return snprintf(target, size + 1, "%" PRIu64, t);
 }
 
 #define LIBWHEEL_TRAIT_SERIALIZE_JSON
