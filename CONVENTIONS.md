@@ -52,6 +52,6 @@ However, allocating data on the heap is supported.
 
 #### JSON
 
-| Function signature            | Description                            | Required traits           |
-|-------------------------------|----------------------------------------|---------------------------|
-| `char* serialize_json(type*)` | Serialize an instance to a JSON string | `LIBWHEEL_SERIALIZE_JSON` |
+| Function signature                            | Description                                                                                                             | Required traits           |
+|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| `uint64t serialize_json(type*, char* target)` | Serialize an instance to JSON and write into the target string. If the target is `NULL`, the required size is returned. | `LIBWHEEL_SERIALIZE_JSON` |
