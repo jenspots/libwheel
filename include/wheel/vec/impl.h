@@ -39,6 +39,31 @@ vec* vec_init_ptr() {
     return v;
 }
 
+void vec_destroy(vec* v) {
+    assert(v);
+    assert(v->values);
+
+    for (uint64_t i = 0; i < v->size; ++i) {
+        if (vec_bit_get(&v->present, i)) {
+            trait_destroy(v->values[i]);
+        }
+    }
+
+    free(v->values);
+    vec_bit_destroy(&v->present);
+}
+
+void vec_destroy_ptr(vec** v) {
+    assert(v);
+    assert(*v);
+
+    // Remove the underlying vector.
+    vec_destroy(*v);
+
+    // Free the allocated memory and set the pointer to null.
+    free(*v);
+    *v = NULL;
+}
 
 vec vec_with_cap(uint64_t capacity) {
     assert(capacity > 0);
@@ -95,20 +120,6 @@ optional vec_pop(vec* v, uint64_t index) {
     optional result = optional_of(v->values[index]);
     vec_bit_set(&v->present, index, false);
     return result;
-}
-
-void vec_destroy(vec* v) {
-    assert(v);
-    assert(v->values);
-
-    for (uint64_t i = 0; i < v->size; ++i) {
-        if (vec_bit_get(&v->present, i)) {
-            trait_destroy(v->values[i]);
-        }
-    }
-
-    free(v->values);
-    vec_bit_destroy(&v->present);
 }
 
 void vec_grow(vec* v) {

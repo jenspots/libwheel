@@ -2,9 +2,35 @@
 
 typedef struct vec vec;
 
+/**
+ * Initialize a new vector with the default capacity.
+ * @note The default capacity is defined by LIBWHEEL_INITIAL_SIZE.
+ * @return A stack allocated vector.
+ * @see vec_init_ptr for a heap allocated vector.
+ */
 vec vec_init();
 
+/**
+ * Initialize a new vector with the default capacity.
+ * @note The default capacity is defined by LIBWHEEL_INITIAL_SIZE.
+ * @return A heap allocated vector.
+ * @see `vec_init` for a stack allocated vector.
+ */
 vec* vec_init_ptr();
+
+/**
+ * Destroy a stack-allocated vector and free its memory.
+ * @param v The vector to destroy.
+ * @see `vec_destroy_ptr` for heap allocated vectors.
+ */
+void vec_destroy(vec* v);
+
+/**
+ * Destroy a heap-allocated vector and free its memory.
+ * @param v The vector to destroy.
+ * @see `vec_destroy` for stack allocated vectors.
+ */
+void vec_destroy_ptr(vec** v);
 
 vec vec_with_cap(uint64_t capacity);
 
@@ -16,7 +42,6 @@ LIBWHEEL_TYPE* vec_get_ptr(const vec* v, uint64_t index);
 
 optional vec_pop(vec* v, uint64_t index);
 
-void vec_destroy(vec* v);
 
 void vec_grow(vec* v);
 
