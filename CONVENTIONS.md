@@ -43,10 +43,10 @@ However, allocating data on the heap is supported.
 
 #### Index based
 
-| Function signature              | Description                                                                                                                                                       | Required traits         |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
-| `optional get(type*, uint64_t)` | Retrieve and clone an element based on index. Returns `optional_empty` when not present or when the index is out-of-bounds. Requires the `WHEEL_TRAIT_COPY` trait | `LIBWHEEL_SHALLOW_COPY` |
-| `T* get_ptr(type*, uint64_t)`   | Retrieve an element based on index, and returns `NULL` if not present or the index is out-of-bounds                                                               | None                    |
+| Function signature                    | Description                                                                                                     | Required traits         |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------|-------------------------|
+| `optional get(type*, uint64_t index)` | Copies an element based on index. Returns `optional_empty` when not present or when the index is out-of-bounds. | `LIBWHEEL_SHALLOW_COPY` |
+| `T* get_ptr(type*, uint64_t index)`   | Retrieve an element based on index, and returns `NULL` if not present or the index is out-of-bounds             | None                    |
 
 ### Serialization
 
