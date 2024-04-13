@@ -10,9 +10,9 @@ int main() {
     assert(*p1.counter == 2);
     assert(*p2.counter == 2);
 
-    rc_string_delete(p1);
+    rc_string_destroy(p1);
     assert(*p2.counter == 1);
 
-    rc_string_delete(p2);
+    rc_string_destroy(p2);
     // TODO: Check manually with valgrind for memory leaks.
 }

@@ -8,7 +8,11 @@ int64_t trait_compare(const LIBWHEEL_TYPE, const LIBWHEEL_TYPE);
 uint64_t trait_hash(const LIBWHEEL_TYPE);
 #endif // LIBWHEEL_TRAIT_HASHABLE
 
-void destroy(LIBWHEEL_TYPE);
+#ifndef LIBWHEEL_TRAIT_DESTROY
+#error "LIBWHEEL_TRAIT_DESTROY must be defined"
+#endif
+void trait_destroy(LIBWHEEL_TYPE);
+
 
 LIBWHEEL_TYPE clone(const LIBWHEEL_TYPE);
 

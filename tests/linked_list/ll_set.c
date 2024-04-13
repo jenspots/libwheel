@@ -30,5 +30,5 @@ int main() {
     }
     assert(n == NULL);
 
-    ll_int_delete(l);
+    ll_int_destroy(l);
 }

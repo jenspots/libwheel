@@ -20,5 +20,5 @@ int main() {
     assert(!bst_string_search(s, "axc").present);
     assert(!bst_string_search(s, "cax").present);
 
-    bst_string_delete(s);
+    bst_string_destroy(s);
 }

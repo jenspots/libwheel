@@ -33,5 +33,5 @@ int main() {
         assert(!result.present);
     }
 
-    vec_int_delete(&v);
+    vec_int_destroy(&v);
 }

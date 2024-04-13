@@ -23,5 +23,5 @@ int main() {
         }
     }
 
-    vec_vec_int_delete(&matrix);
+    vec_vec_int_destroy(&matrix);
 }

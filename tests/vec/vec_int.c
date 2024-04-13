@@ -11,5 +11,5 @@ int main(int argc, char** argv) {
         assert(o.value == j);
     }
     assert(v.size == 10);
-    vec_int_delete(&v);
+    vec_int_destroy(&v);
 }

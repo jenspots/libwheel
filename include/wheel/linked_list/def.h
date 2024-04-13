@@ -10,4 +10,4 @@
 #define ll_append    LIBWHEEL_DEFINE(ll, append)
 #define ll_insert_at LIBWHEEL_DEFINE(ll, insert_at)
 #define ll_set       LIBWHEEL_DEFINE(ll, set)
-#define ll_delete    LIBWHEEL_DEFINE(ll, delete)
+#define ll_delete    LIBWHEEL_DEFINE(ll, destroy)

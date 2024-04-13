@@ -15,5 +15,5 @@ int main() {
         assert(result.value == i);
     }
 
-    ll_int_delete(l);
+    ll_int_destroy(l);
 }

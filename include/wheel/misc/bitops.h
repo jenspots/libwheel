@@ -59,7 +59,7 @@ bool vec_bit_get(const vec_bit* v, const uint64_t index) {
     return (NTH_BIT(index % 64) & v->values[index / 64]) > 0;
 }
 
-void vec_bit_delete(vec_bit* v) {
+void vec_bit_destroy(vec_bit* v) {
     assert(v);
     assert(v->values);
     free(v->values);

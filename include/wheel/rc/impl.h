@@ -37,7 +37,7 @@ void rc_delete(rc r) {
 
     // If no references remain, delete the underlying value.
     if (*r.counter == 0) {
-        destroy(r.value);
+        trait_destroy(r.value);
     }
 }
 

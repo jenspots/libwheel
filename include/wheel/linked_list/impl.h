@@ -136,7 +136,7 @@ void ll_set(ll* l, uint64_t index, LIBWHEEL_TYPE value) {
         current = next;
     }
 
-    destroy(current->element);
+    trait_destroy(current->element);
     current->element = value;
 }
 
@@ -146,7 +146,7 @@ void ll_delete(ll l) {
 
     while (current != NULL) {
         next = current->next;
-        destroy(current->element);
+        trait_destroy(current->element);
         free(current);
         current = next;
     }

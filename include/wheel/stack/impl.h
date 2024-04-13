@@ -29,7 +29,7 @@ optional stack_pop(stack* s) {
 }
 
 void stack_delete(stack* s) {
-    vec_delete(&s->values);
+    vec_destroy(&s->values);
 }
 
 #include "wheel/wheel/undef.h"

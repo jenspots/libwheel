@@ -32,7 +32,7 @@ bst* bst_init() {
 
 void bst_node_delete(bst_node* node) {
     assert(node);
-    destroy(node->element);
+    trait_destroy(node->element);
     free(node);
 }
 

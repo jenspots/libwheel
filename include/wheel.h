@@ -27,6 +27,7 @@
  * side effects for any subsequent usages.
  */
 #undef LIBWHEEL_TRAIT_COMPARE
+#undef LIBWHEEL_TRAIT_DESTROY
 #undef LIBWHEEL_TRAIT_HASHABLE
 #undef LIBWHEEL_TRAIT_SHALLOW_COPY
 #undef LIBWHEEL_TRAIT_STRINGIFY

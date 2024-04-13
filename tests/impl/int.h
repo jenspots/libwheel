@@ -45,11 +45,12 @@ uint64_t int_trait_serialize_json(char* target, const uint64_t t) {
     return int_trait_stringify(target, t);
 }
 
-#include <wheel.h>
-
-void int_destroy(uint64_t t) {
-    // pass
+#define LIBWHEEL_TRAIT_DESTROY
+void int_trait_destroy(const uint64_t t) {
+    // Do nothing.
 }
+
+#include <wheel.h>
 
 uint64_t int_clone(const uint64_t t) {
     return t;

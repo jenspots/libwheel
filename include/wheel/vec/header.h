@@ -4,6 +4,8 @@ typedef struct vec vec;
 
 vec vec_init();
 
+vec* vec_init_ptr();
+
 vec vec_with_cap(uint64_t capacity);
 
 #ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
@@ -14,7 +16,7 @@ LIBWHEEL_TYPE* vec_get_ptr(const vec* v, uint64_t index);
 
 optional vec_pop(vec* v, uint64_t index);
 
-void vec_delete(vec* v);
+void vec_destroy(vec* v);
 
 void vec_grow(vec* v);
 

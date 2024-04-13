@@ -18,5 +18,5 @@ int main() {
         assert(o.value == i);
     }
 
-    stack_int_delete(&s);
+    stack_int_destroy(&s);
 }

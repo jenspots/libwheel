@@ -1,7 +1,9 @@
 #undef vec
 #undef vec_init
+#undef vec_init_ptr
+#undef vec_destroy
+#undef vec_destroy_ptr
 #undef vec_with_cap
-#undef vec_delete
 #undef vec_pop
 #undef vec_get
 #undef vec_get_ptr

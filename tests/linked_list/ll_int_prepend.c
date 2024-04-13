@@ -15,5 +15,5 @@ int main() {
         assert(result.value == (63 - i));
     }
 
-    ll_int_delete(l);
+    ll_int_destroy(l);
 }

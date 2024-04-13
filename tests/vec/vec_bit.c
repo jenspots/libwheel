@@ -20,5 +20,5 @@ int main() {
         assert(!vec_bit_get(&v, i));
     }
 
-    vec_bit_delete(&v);
+    vec_bit_destroy(&v);
 }

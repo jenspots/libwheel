@@ -2,8 +2,10 @@
 
 #define vec                LIBWHEEL_APPEND(vec)
 #define vec_init           LIBWHEEL_DEFINE(vec, init)
+#define vec_init_ptr       LIBWHEEL_DEFINE(vec, init_ptr)
+#define vec_destroy        LIBWHEEL_DEFINE(vec, destroy)
+#define vec_destroy_ptr    LIBWHEEL_DEFINE(vec, destroy_ptr)
 #define vec_with_cap       LIBWHEEL_DEFINE(vec, with_cap)
-#define vec_delete         LIBWHEEL_DEFINE(vec, delete)
 #define vec_pop            LIBWHEEL_DEFINE(vec, pop)
 #define vec_get            LIBWHEEL_DEFINE(vec, get)
 #define vec_get_ptr        LIBWHEEL_DEFINE(vec, get_ptr)

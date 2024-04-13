@@ -39,11 +39,12 @@ uint64_t string_trait_hash(const char* t) {
     exit(-1);
 }
 
-#include <wheel.h>
-
-void string_destroy(char* value) {
+#define LIBWHEEL_TRAIT_DESTROY
+void string_trait_destroy(char* value) {
     free(value);
 }
+
+#include <wheel.h>
 
 char* string_clone(const char* value) {
     char* result = strdup(value);

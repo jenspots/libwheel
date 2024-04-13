@@ -32,6 +32,14 @@ vec vec_init() {
     return v;
 }
 
+vec* vec_init_ptr() {
+    vec* v = malloc(sizeof(vec));
+    assert(v);
+    *v = vec_init();
+    return v;
+}
+
+
 vec vec_with_cap(uint64_t capacity) {
     assert(capacity > 0);
     vec v = {
@@ -89,18 +97,18 @@ optional vec_pop(vec* v, uint64_t index) {
     return result;
 }
 
-void vec_delete(vec* v) {
+void vec_destroy(vec* v) {
     assert(v);
     assert(v->values);
 
     for (uint64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
-            destroy(v->values[i]);
+            trait_destroy(v->values[i]);
         }
     }
 
     free(v->values);
-    vec_bit_delete(&v->present);
+    vec_bit_destroy(&v->present);
 }
 
 void vec_grow(vec* v) {
@@ -146,7 +154,7 @@ void vec_filter(vec* v, bool (*f)(LIBWHEEL_TYPE)) {
     for (uint64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i) && !f(v->values[i])) {
             vec_bit_set(&v->present, i, false);
-            destroy(v->values[i]);
+            trait_destroy(v->values[i]);
         }
     }
 }

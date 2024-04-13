@@ -2,7 +2,7 @@
 
 #define bst             LIBWHEEL_APPEND(bst)
 #define bst_init        LIBWHEEL_DEFINE(bst, init)
-#define bst_delete      LIBWHEEL_DEFINE(bst, delete)
+#define bst_delete      LIBWHEEL_DEFINE(bst, destroy)
 #define bst_insert      LIBWHEEL_DEFINE(bst, insert)
 #define bst_search      LIBWHEEL_DEFINE(bst, search)
 #define bst_remove      LIBWHEEL_DEFINE(bst, remove)

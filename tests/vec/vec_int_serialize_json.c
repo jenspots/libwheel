@@ -12,7 +12,7 @@ void test_simple() {
     uint64_t output_size = vec_int_serialize_json(&v, NULL);
     char* output = malloc(output_size * sizeof(char));
     vec_int_serialize_json(&v, output);
-    vec_int_delete(&v);
+    vec_int_destroy(&v);
 
     // Check the output.
     assert(strcmp(output, "[0,1,2,3,4]") == 0);
@@ -26,7 +26,7 @@ void test_empty() {
     uint64_t output_size = vec_int_serialize_json(&v, NULL);
     char* output = malloc(output_size * sizeof(char));
     vec_int_serialize_json(&v, output);
-    vec_int_delete(&v);
+    vec_int_destroy(&v);
 
     // Check the output.
     assert(strcmp(output, "[]") == 0);
@@ -41,7 +41,7 @@ void test_single_element() {
     uint64_t output_size = vec_int_serialize_json(&v, NULL);
     char* output = malloc(output_size * sizeof(char));
     vec_int_serialize_json(&v, output);
-    vec_int_delete(&v);
+    vec_int_destroy(&v);
 
     // Check the output.
     assert(strcmp(output, "[5]") == 0);

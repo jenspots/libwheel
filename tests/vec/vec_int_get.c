@@ -35,5 +35,5 @@ int main() {
         assert(!vec_int_get(&v, i).present);
     }
 
-    vec_int_delete(&v);
+    vec_int_destroy(&v);
 }

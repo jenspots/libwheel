@@ -10,5 +10,5 @@ int main() {
     assert(!bst_int_insert(i, 1));
     assert(!bst_int_insert(i, 0));
     assert(!bst_int_insert(i, 2));
-    bst_int_delete(i);
+    bst_int_destroy(i);
 }
