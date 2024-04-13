@@ -6,6 +6,7 @@
 #define vec_delete        LIBWHEEL_DEFINE(vec, delete)
 #define vec_pop           LIBWHEEL_DEFINE(vec, pop)
 #define vec_get           LIBWHEEL_DEFINE(vec, get)
+#define vec_get_ptr       LIBWHEEL_DEFINE(vec, get_ptr)
 #define vec_set           LIBWHEEL_DEFINE(vec, set)
 #define vec_grow          LIBWHEEL_DEFINE(vec, grow)
 #define vec_foreach       LIBWHEEL_DEFINE(vec, foreach)

@@ -4,6 +4,7 @@
 #undef vec_delete
 #undef vec_pop
 #undef vec_get
+#undef vec_get_ptr
 #undef vec_set
 #undef vec_grow
 #undef vec_foreach

@@ -8,4 +8,8 @@ void destroy(LIBWHEEL_TYPE);
 
 LIBWHEEL_TYPE clone(const LIBWHEEL_TYPE);
 
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+LIBWHEEL_TYPE shallow_copy(const LIBWHEEL_TYPE);
+#endif
+
 #include "wheel/wheel/undef.h"

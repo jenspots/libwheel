@@ -6,7 +6,11 @@ vec vec_init();
 
 vec vec_with_cap(uint64_t capacity);
 
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
 optional vec_get(vec* v, uint64_t index);
+#endif
+
+LIBWHEEL_TYPE* vec_get_ptr(const vec* v, uint64_t index);
 
 optional vec_pop(vec* v, uint64_t index);
 

@@ -5,6 +5,7 @@
 
 #define LIBWHEEL_TYPE  uint64_t
 #define LIBWHEEL_ALIAS int
+#define LIBWHEEL_TRAIT_SHALLOW_COPY
 
 #include <wheel.h>
 
@@ -27,6 +28,10 @@ void int_destroy(uint64_t t) {
 }
 
 uint64_t int_clone(const uint64_t t) {
+    return t;
+}
+
+uint64_t int_shallow_copy(const uint64_t t) {
     return t;
 }
 

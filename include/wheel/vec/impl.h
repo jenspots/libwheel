@@ -43,6 +43,7 @@ vec vec_with_cap(uint64_t capacity) {
     return v;
 }
 
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
 optional vec_get(vec* v, uint64_t index) {
     assert(v);
 
@@ -54,7 +55,22 @@ optional vec_get(vec* v, uint64_t index) {
         return optional_empty();
     }
 
-    return optional_of(v->values[index]);
+    return optional_of(shallow_copy(v->values[index]));
+}
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
+
+inline LIBWHEEL_TYPE* vec_get_ptr(const vec* v, const uint64_t index) {
+    assert(v);
+
+    if (index >= v->size) {
+        return nullptr;
+    }
+
+    if (!vec_bit_get(&v->present, index)) {
+        return nullptr;
+    }
+
+    return v->values + index;
 }
 
 optional vec_pop(vec* v, uint64_t index) {

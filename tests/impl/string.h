@@ -5,6 +5,7 @@
 
 #define LIBWHEEL_TYPE  char*
 #define LIBWHEEL_ALIAS string
+#define LIBWHEEL_TRAIT_SHALLOW_COPY
 
 #include <wheel.h>
 
@@ -34,6 +35,12 @@ void string_destroy(char* value) {
 }
 
 char* string_clone(const char* value) {
+    char* result = strdup(value);
+    assert(result);
+    return result;
+}
+
+char* string_shallow_copy(const char* value) {
     char* result = strdup(value);
     assert(result);
     return result;
