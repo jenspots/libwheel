@@ -14,14 +14,15 @@ The conventions below will use the `type` datatype as a placeholder and omit the
 Some functionality is optional and can be enabled by defining a trait. Some require the implementation of specific
 functions.
 
-| Trait                   | Description                             | Required functions   |
-|-------------------------|-----------------------------------------|----------------------|
-| `LIBWHEEL_SHALLOW_COPY` | Shallow copies an instance              | `trait_shallow_copy` |
-| `LIBWHEEL_DEEP_COPY`    | Deep copies an instance                 | `trait_deep_copy`          |
-| `LIBWHEEL_EQUAL`        | Compares two instances by equality      | `trait_equal`              |
-| `LIBWHEEL_COMPARE`      | Compares two instances by order         | `trait_compare`            |
-| `LIBWHEEL_HASH`         | Calculate the hash value of an instance | `trait_hash`               |
-| `LIBWHEEL_STRINGIFY`    | Convert an instance to a `char*`        | `trait_stringify`          |
+| Trait                     | Description                             | Required functions     |
+|---------------------------|-----------------------------------------|------------------------|
+| `LIBWHEEL_SHALLOW_COPY`   | Shallow copies an instance              | `trait_shallow_copy`   |
+| `LIBWHEEL_DEEP_COPY`      | Deep copies an instance                 | `trait_deep_copy`      |
+| `LIBWHEEL_EQUAL`          | Compares two instances by equality      | `trait_equal`          |
+| `LIBWHEEL_COMPARE`        | Compares two instances by order         | `trait_compare`        |
+| `LIBWHEEL_HASH`           | Calculate the hash value of an instance | `trait_hash`           |
+| `LIBWHEEL_STRINGIFY`      | Convert an instance to a `char*`        | `trait_stringify`      |
+| `LIBWHEEL_SERIALIZE_JSON` | Serialize an instance to JSON           | `trait_serialize_json` |
 
 ### Constructors, destructors
 
