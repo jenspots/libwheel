@@ -1,14 +1,22 @@
 #ifndef LIBWHEEL_STRING_H
 #define LIBWHEEL_STRING_H
 
+#include <assert.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define LIBWHEEL_TYPE  char*
 #define LIBWHEEL_ALIAS string
+
 #define LIBWHEEL_TRAIT_SHALLOW_COPY
+char* string_shallow_copy(const char* value) {
+    char* result = strdup(value);
+    assert(result);
+    return result;
+}
 
-#include <wheel.h>
-
+#define LIBWHEEL_TRAIT_COMPARE
 int64_t string_compare(const char* a, const char* b) {
     assert(a);
     assert(b);
@@ -26,21 +34,18 @@ int64_t string_compare(const char* a, const char* b) {
     }
 }
 
+#define LIBWHEEL_TRAIT_HASHABLE
 uint64_t string_hash(const char* t) {
     exit(-1);
 }
+
+#include <wheel.h>
 
 void string_destroy(char* value) {
     free(value);
 }
 
 char* string_clone(const char* value) {
-    char* result = strdup(value);
-    assert(result);
-    return result;
-}
-
-char* string_shallow_copy(const char* value) {
     char* result = strdup(value);
     assert(result);
     return result;

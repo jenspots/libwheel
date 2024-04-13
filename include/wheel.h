@@ -26,7 +26,11 @@
  * We undefine any traits which may be used in order to prevent unintended
  * side effects for any subsequent usages.
  */
+#undef LIBWHEEL_TRAIT_COMPARE
+#undef LIBWHEEL_TRAIT_HASHABLE
 #undef LIBWHEEL_TRAIT_SHALLOW_COPY
+#undef LIBWHEEL_TRAIT_STRINGIFY
+#undef LIBWHEEL_TRAIT_SERIALIZE_JSON
 
 /*
  * Remove the type and alias definitions. End users should not be able to
