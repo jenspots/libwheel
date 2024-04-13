@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <wheel/misc/bitops.h>
-#include <stdint.h>
 
 int main() {
     vec_bit v = vec_bit_with_cap(64);

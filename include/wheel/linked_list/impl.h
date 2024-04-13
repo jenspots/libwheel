@@ -20,7 +20,7 @@ ll ll_init() {
     return result;
 }
 
-optional ll_head(ll *l) {
+optional ll_head(ll* l) {
     if (l->head) {
         return optional_of(l->head->element);
     } else {
@@ -28,7 +28,7 @@ optional ll_head(ll *l) {
     }
 }
 
-optional ll_tail(ll *l) {
+optional ll_tail(ll* l) {
     if (l->tail) {
         return optional_of(l->tail->element);
     } else {
@@ -36,7 +36,7 @@ optional ll_tail(ll *l) {
     }
 }
 
-optional ll_get(ll *l, uint64_t index) {
+optional ll_get(ll* l, uint64_t index) {
     ll_node* current = l->head;
     ll_node* next = NULL;
 
@@ -51,7 +51,7 @@ optional ll_get(ll *l, uint64_t index) {
     return optional_of(current->element);
 }
 
-void ll_prepend(ll *l, LIBWHEEL_TYPE element) {
+void ll_prepend(ll* l, LIBWHEEL_TYPE element) {
     ll_node* node = malloc(sizeof(ll_node));
     node->prev = NULL;
     node->element = element;
@@ -74,7 +74,7 @@ void ll_prepend(ll *l, LIBWHEEL_TYPE element) {
     l->size += 1;
 }
 
-void ll_append(ll *l, LIBWHEEL_TYPE element) {
+void ll_append(ll* l, LIBWHEEL_TYPE element) {
     ll_node* node = malloc(sizeof(ll_node));
     node->prev = NULL;
     node->element = element;
@@ -97,7 +97,7 @@ void ll_append(ll *l, LIBWHEEL_TYPE element) {
     l->size += 1;
 }
 
-void ll_insert_at(ll *l, uint64_t index, LIBWHEEL_TYPE element) {
+void ll_insert_at(ll* l, uint64_t index, LIBWHEEL_TYPE element) {
     // Special cases, makes the rest a bit simpler.
     if (index == 0) {
         ll_prepend(l, element);

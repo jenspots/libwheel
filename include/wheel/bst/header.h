@@ -1,5 +1,5 @@
-#include <stdbool.h>
 #include "wheel/optional/header.h"
+#include <stdbool.h>
 
 #include "wheel/wheel/def.h"
 

@@ -1,11 +1,11 @@
-#include <stdlib.h>
 #include "wheel/interface/header.h"
+#include <stdlib.h>
 
 #include "header.h"
 #include "wheel/wheel/def.h"
 
 typedef struct rc {
-    uint64_t *counter;
+    uint64_t* counter;
     LIBWHEEL_TYPE value;
 } rc;
 

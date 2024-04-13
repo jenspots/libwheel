@@ -1,6 +1,5 @@
 #include "../impl/int.h"
 
-
 int main() {
     vec_int v = vec_int_init();
     uint64_t initial_size = v.size;

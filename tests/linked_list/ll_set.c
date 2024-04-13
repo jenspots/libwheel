@@ -22,7 +22,7 @@ int main() {
     /*
      * Check if all elements are correctly set.
      */
-    ll_int_node *n = l.head;
+    ll_int_node* n = l.head;
     for (uint64_t i = 0; i < 64; ++i) {
         assert(n != NULL);
         assert(n->element == i);

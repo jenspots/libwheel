@@ -2,7 +2,7 @@
 #include <assert.h>
 
 int main() {
-    trie_int *trie = trie_int_init();
+    trie_int* trie = trie_int_init();
 
     uint64_t a = 10000000000;
     uint64_t b = 10000000001;

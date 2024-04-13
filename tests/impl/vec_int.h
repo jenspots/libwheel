@@ -3,7 +3,7 @@
 
 #include "int.h"
 
-#define LIBWHEEL_TYPE vec_int
+#define LIBWHEEL_TYPE  vec_int
 #define LIBWHEEL_ALIAS vec_int
 #define LIBWHEEL_TRAIT_SHALLOW_COPY
 

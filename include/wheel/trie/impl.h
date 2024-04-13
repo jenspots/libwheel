@@ -14,7 +14,7 @@ typedef struct trie_node {
     optional value;
 } trie_node;
 
-optional trie_node_search(trie_node *node, const char *string) {
+optional trie_node_search(trie_node* node, const char* string) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -59,7 +59,7 @@ optional trie_node_search(trie_node *node, const char *string) {
     }
 }
 
-void trie_node_branch(trie_node *node, const char *string, uint64_t i, LIBWHEEL_TYPE value) {
+void trie_node_branch(trie_node* node, const char* string, uint64_t i, LIBWHEEL_TYPE value) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -84,7 +84,8 @@ void trie_node_branch(trie_node *node, const char *string, uint64_t i, LIBWHEEL_
     trie_node* branched = calloc(1, sizeof(trie_node));
     branched->skip = string + i;
     branched->skip_length = strlen(string + i);
-    branched->value = optional_of(value);;
+    branched->value = optional_of(value);
+    ;
 
     // Pas de skip-lengte aan van de bovenste top.
     node->next = child;
@@ -99,7 +100,7 @@ void trie_node_branch(trie_node *node, const char *string, uint64_t i, LIBWHEEL_
     }
 }
 
-optional trie_node_add(trie_node *node, const char *string, LIBWHEEL_TYPE value) {
+optional trie_node_add(trie_node* node, const char* string, LIBWHEEL_TYPE value) {
     assert(node);
     assert(node->skip_length);
     assert(string);
@@ -163,7 +164,7 @@ optional trie_node_add(trie_node *node, const char *string, LIBWHEEL_TYPE value)
     }
 }
 
-optional trie_node_remove(trie_node **root, trie_node *node, const char *string) {
+optional trie_node_remove(trie_node** root, trie_node* node, const char* string) {
     assert(root);
     assert(*root);
     assert((*root)->skip_length);
@@ -205,7 +206,7 @@ optional trie_node_remove(trie_node **root, trie_node *node, const char *string)
         if (node->next == NULL) {
             if (node->right) {
                 *root = node->right;
-                trie_node *tmp = node->right;
+                trie_node* tmp = node->right;
                 while (tmp->left) {
                     tmp = tmp->left;
                 }
@@ -220,13 +221,13 @@ optional trie_node_remove(trie_node **root, trie_node *node, const char *string)
         // samen. Hiervoor dienen node->next->left en node->next->right opnieuw
         // toe te voegen aan de deelbomen node->left en node->right.
         else {
-            trie_node *old_next = node->next;
+            trie_node* old_next = node->next;
             node->skip = node->next->skip - node->skip_length;
             node->skip_length += node->next->skip_length;
             node->value = node->next->value;
 
             if (node->next->right) {
-                trie_node *tmp = node->next->right;
+                trie_node* tmp = node->next->right;
                 while (tmp->left) {
                     tmp = tmp->left;
                 }
@@ -252,7 +253,7 @@ optional trie_node_remove(trie_node **root, trie_node *node, const char *string)
         // Indien de huidige top geen prefix is, en node->next geen linker- of
         // rechterkind heeft kunnen we de twee toppen samen voegen.
         if (!node->value.present && !node->next->left && !node->next->right && node->next) {
-            trie_node *tmp = node->next;
+            trie_node* tmp = node->next;
             node->skip = node->next->skip - node->skip_length;
             node->skip_length += node->next->skip_length;
             node->value = node->next->value;
@@ -274,7 +275,7 @@ trie* trie_init() {
     return calloc(1, sizeof(trie));
 };
 
-optional trie_search(trie *trie, const char *string) {
+optional trie_search(trie* trie, const char* string) {
     if (string[0] == '\0') {
         return trie->empty;
     }
@@ -286,7 +287,7 @@ optional trie_search(trie *trie, const char *string) {
     return trie_node_search(trie->root, string);
 }
 
-optional trie_add(trie *trie, const char *string, LIBWHEEL_TYPE value) {
+optional trie_add(trie* trie, const char* string, LIBWHEEL_TYPE value) {
     if (string[0] == '\0') {
         optional previous = trie->empty;
         trie->empty = optional_of(value);
@@ -313,7 +314,7 @@ optional trie_add(trie *trie, const char *string, LIBWHEEL_TYPE value) {
     return previous;
 }
 
-optional trie_remove(trie *trie, const char *string) {
+optional trie_remove(trie* trie, const char* string) {
     assert(trie);
     assert(string);
 
@@ -338,7 +339,7 @@ optional trie_remove(trie *trie, const char *string) {
     return result;
 }
 
-uint64_t trie_size(trie *trie) {
+uint64_t trie_size(trie* trie) {
     return trie->size;
 }
 
