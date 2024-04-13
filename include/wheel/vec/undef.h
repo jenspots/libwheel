@@ -14,3 +14,4 @@
 #undef vec_filter
 #undef vec_shallow_clone
 #undef vec_deep_clone
+#undef vec_serialize_json

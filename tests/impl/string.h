@@ -10,14 +10,14 @@
 #define LIBWHEEL_ALIAS string
 
 #define LIBWHEEL_TRAIT_SHALLOW_COPY
-char* string_shallow_copy(const char* value) {
+char* string_trait_shallow_copy(const char* value) {
     char* result = strdup(value);
     assert(result);
     return result;
 }
 
 #define LIBWHEEL_TRAIT_COMPARE
-int64_t string_compare(const char* a, const char* b) {
+int64_t string_trait_compare(const char* a, const char* b) {
     assert(a);
     assert(b);
 
@@ -35,7 +35,7 @@ int64_t string_compare(const char* a, const char* b) {
 }
 
 #define LIBWHEEL_TRAIT_HASHABLE
-uint64_t string_hash(const char* t) {
+uint64_t string_trait_hash(const char* t) {
     exit(-1);
 }
 

@@ -7,7 +7,7 @@
 #define LIBWHEEL_ALIAS vec_int
 
 #define LIBWHEEL_TRAIT_SHALLOW_COPY
-vec_int vec_int_shallow_copy(const vec_int v) {
+vec_int vec_int_trait_shallow_copy(const vec_int v) {
     vec_int result = vec_int_init();
 
     for (uint64_t i = 0; i < v.size; ++i) {

@@ -30,4 +30,8 @@ vec vec_shallow_clone(vec* v);
 
 vec vec_deep_clone(const vec* v);
 
+#ifdef LIBWHEEL_TRAIT_SERIALIZE_JSON
+uint64_t vec_serialize_json(const vec* v, char* target);
+#endif // LIBWHEEL_TRAIT_SERIALIZE_JSON
+
 #include "wheel/wheel/undef.h"

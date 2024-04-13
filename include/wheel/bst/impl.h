@@ -105,7 +105,7 @@ bool bst_insert(bst* tree, LIBWHEEL_TYPE element) {
     }
 
     while (1) {
-        int cmp = compare(current->element, element);
+        int cmp = trait_compare(current->element, element);
 
         if (cmp == 0) {
             return false;
@@ -139,7 +139,7 @@ optional bst_search(bst* tree, LIBWHEEL_TYPE element) {
     }
 
     while (1) {
-        int cmp = compare(current->element, element);
+        int cmp = trait_compare(current->element, element);
 
         if (cmp == 0) {
             return optional_of(current->element);
@@ -159,7 +159,7 @@ bool bst_remove(bst* tree, LIBWHEEL_TYPE element) {
     bst_node* current = tree->root;
 
     while (1) {
-        int cmp = compare(current->element, element);
+        int cmp = trait_compare(current->element, element);
 
         if (cmp == 0) {
             bst_node_remove(tree, current);

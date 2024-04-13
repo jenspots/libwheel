@@ -55,7 +55,7 @@ optional vec_get(vec* v, uint64_t index) {
         return optional_empty();
     }
 
-    return optional_of(shallow_copy(v->values[index]));
+    return optional_of(trait_shallow_copy(v->values[index]));
 }
 #endif // LIBWHEEL_TRAIT_SHALLOW_COPY
 
@@ -179,5 +179,45 @@ vec vec_deep_clone(const vec* v) {
 
     return copy;
 }
+
+#ifdef LIBWHEEL_TRAIT_SERIALIZE_JSON
+uint64_t vec_serialize_json(const vec* v, char* target) {
+    // Calculate the total length of the JSON string.
+    uint64_t total_length = 2; // '[' and ']'
+
+    for (uint64_t i = 0; i < v->size; ++i) {
+        if (vec_bit_get(&v->present, i)) {
+           total_length += trait_serialize_json(NULL, v->values[i]);
+           total_length += 1; // ','
+        }
+    }
+
+    if (target == NULL) {
+        return total_length;
+    }
+
+    // Open the array.
+    target[0] = '[';
+    uint64_t offset = 1;
+
+    // Serialize each value separately.
+    for (uint64_t i = 0; i < v->size; ++i) {
+        if (vec_bit_get(&v->present, i)) {
+            offset += trait_serialize_json(target + offset, v->values[i]);
+            target[offset] = ',';
+            offset += 1;
+        }
+    }
+
+    // Overwrite the last ',' with ']' if there are any elements.
+    if (offset > 1) {
+        target[offset - 1] = ']';
+    } else {
+        target[offset] = ']';
+    }
+
+    return total_length;
+}
+#endif // LIBWHEEL_TRAIT_SERIALIZE_JSON
 
 #include "wheel/wheel/undef.h"

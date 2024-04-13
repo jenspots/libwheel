@@ -98,12 +98,12 @@ void eht_split(eht* table, uint64_t index) {
 }
 
 uint64_t eht_index(eht* table, LIBWHEEL_TYPE element) {
-    return TAIL(table->bit_count, hash(element));
+    return TAIL(table->bit_count, trait_hash(element));
 }
 
 bool eht_insert(eht* table, LIBWHEEL_TYPE element) {
     while (true) {
-        uint64_t hash_value = hash(element);
+        uint64_t hash_value = trait_hash(element);
         uint64_t bucket_index = eht_index(table, element);
         ehtb* bucket = table->buckets[bucket_index];
         bool free_element = false;
@@ -113,7 +113,7 @@ bool eht_insert(eht* table, LIBWHEEL_TYPE element) {
         for (uint64_t i = 0; i < LIBWHEEL_EHT_BUCKET_SIZE; ++i) {
             optional e = bucket->values[i];
 
-            if (e.present && hash_value == hash(e.value)) {
+            if (e.present && hash_value == trait_hash(e.value)) {
                 return false;
             }
 
@@ -137,7 +137,7 @@ bool eht_insert(eht* table, LIBWHEEL_TYPE element) {
 optional ehtb_search(ehtb* bucket, uint64_t hash_value) {
     for (uint64_t i = 0; i < LIBWHEEL_EHT_BUCKET_SIZE; ++i) {
         optional e = bucket->values[i];
-        if (e.present && hash_value == hash(e.value)) {
+        if (e.present && hash_value == trait_hash(e.value)) {
             return e;
         }
     }
@@ -147,7 +147,7 @@ optional ehtb_search(ehtb* bucket, uint64_t hash_value) {
 optional eht_search(eht* table, LIBWHEEL_TYPE element) {
     ehtb* bucket = table->buckets[eht_index(table, element)];
     assert(bucket);
-    return ehtb_search(bucket, hash(element));
+    return ehtb_search(bucket, trait_hash(element));
 }
 
 uint64_t eht_capacity(eht* e) {

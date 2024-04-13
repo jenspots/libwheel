@@ -1,7 +1,8 @@
-#undef compare
-#undef hash
 #undef destroy
 #undef clone
-#undef shallow_copy
-#undef stringify
-#undef serialize_json
+
+#undef trait_compare
+#undef trait_hash
+#undef trait_shallow_copy
+#undef trait_stringify
+#undef trait_serialize_json
