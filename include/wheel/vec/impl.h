@@ -63,11 +63,11 @@ inline LIBWHEEL_TYPE* vec_get_ptr(const vec* v, const uint64_t index) {
     assert(v);
 
     if (index >= v->size) {
-        return nullptr;
+        return NULL;
     }
 
     if (!vec_bit_get(&v->present, index)) {
-        return nullptr;
+        return NULL;
     }
 
     return v->values + index;
