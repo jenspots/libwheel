@@ -77,7 +77,7 @@ vec vec_with_cap(uint64_t capacity) {
 }
 
 #ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
-optional vec_get(vec* v, uint64_t index) {
+optional vec_get(const vec* v, const uint64_t index) {
     assert(v);
 
     if (index >= v->size) {
