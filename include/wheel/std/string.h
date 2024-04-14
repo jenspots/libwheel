@@ -50,6 +50,6 @@ void string_trait_destroy(char* value) {
     free(value);
 }
 
-#include <wheel.h>
+#include "wheel.h"
 
 #endif // LIBWHEEL_STRING_H

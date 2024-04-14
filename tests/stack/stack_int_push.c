@@ -2,8 +2,8 @@
  * Copyright (c) 2023.
  */
 
-#include "../impl/int.h"
 #include <assert.h>
+#include <wheel/std/int.h>
 
 int main() {
     stack_int s = stack_int_init();

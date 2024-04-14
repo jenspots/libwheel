@@ -1,6 +1,6 @@
-#include "../impl/int.h"
+#include <wheel/std/int.h>
 
-bool is_even(uint64_t i) {
+bool is_even(int i) {
     return i % 2 == 0;
 }
 

@@ -1,6 +1,5 @@
 #include <assert.h>
-
-#include "../impl/int.h"
+#include <wheel/std/int.h>
 
 int main() {
     bst_int* i = bst_int_init();

@@ -1,6 +1,5 @@
-#include "../impl/vec_int.h"
-
 #include <assert.h>
+#include <wheel/std/int.h>
 
 int main() {
     vec_int v = vec_int_with_cap(8);

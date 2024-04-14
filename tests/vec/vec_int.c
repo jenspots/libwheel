@@ -1,5 +1,5 @@
-#include "../impl/int.h"
 #include <assert.h>
+#include <wheel/std/int.h>
 
 int main(int argc, char** argv) {
     vec_int v = vec_int_with_cap(5);

@@ -1,7 +1,7 @@
 #ifndef LIBWHEEL_VEC_INT_H
 #define LIBWHEEL_VEC_INT_H
 
-#include "int.h"
+#include <wheel/std/int.h>
 
 #define LIBWHEEL_TYPE  vec_int
 #define LIBWHEEL_ALIAS vec_int

@@ -1,4 +1,4 @@
-#include "../impl/string.h"
+#include <wheel/std/string.h>
 
 int main() {
     char* hello = strdup("Hello, world!");

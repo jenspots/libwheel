@@ -1,5 +1,5 @@
-#include "../impl/int.h"
 #include <assert.h>
+#include <wheel/std/int.h>
 
 void test_simple() {
     // Create vector [0, 1, 2, 3, 4].

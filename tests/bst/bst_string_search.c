@@ -1,5 +1,5 @@
-#include "../impl/string.h"
 #include <assert.h>
+#include <wheel/std/string.h>
 
 int main() {
     bst_string* s = bst_string_init();

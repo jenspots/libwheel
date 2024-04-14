@@ -1,13 +1,13 @@
-#include "../impl/int.h"
 #include <assert.h>
+#include <wheel/std/int.h>
 
 int main() {
     trie_int* trie = trie_int_init();
 
-    uint64_t a = 10000000000;
-    uint64_t b = 10000000001;
-    uint64_t c = 10000000002;
-    uint64_t d = 10000000003;
+    int a = 100000000;
+    int b = 100000001;
+    int c = 100000002;
+    int d = 100000003;
 
     assert(!trie_int_add(trie, "10.0.0.0", a).present);
     assert(!trie_int_add(trie, "10.0.0.1", b).present);

@@ -1,9 +1,9 @@
-#include "../impl/int.h"
+#include <wheel/std/int.h>
 
 /**
  * Rocket science.
  */
-uint64_t mul2(uint64_t i) {
+int mul2(int i) {
     return 2 * i;
 }
 
