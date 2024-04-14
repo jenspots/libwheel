@@ -1,6 +1,6 @@
 #include "wheel/bst/undef.h"
 #include "wheel/eht/undef.h"
-#include "wheel/interface/undef.h"
+#include "wheel/traits/undef.h"
 #include "wheel/linked_list/undef.h"
 #include "wheel/optional/undef.h"
 #include "wheel/rc/undef.h"

@@ -1,6 +1,6 @@
 #include "wheel/bst/def.h"
 #include "wheel/eht/def.h"
-#include "wheel/interface/def.h"
+#include "wheel/traits/def.h"
 #include "wheel/linked_list/def.h"
 #include "wheel/optional/def.h"
 #include "wheel/rc/def.h"

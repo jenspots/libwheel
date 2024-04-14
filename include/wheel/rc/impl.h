@@ -1,4 +1,4 @@
-#include "wheel/interface/header.h"
+#include "wheel/traits/header.h"
 #include <stdlib.h>
 
 #include "header.h"
