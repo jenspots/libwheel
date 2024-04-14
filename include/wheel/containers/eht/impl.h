@@ -1,8 +1,8 @@
-#include "wheel/eht/header.h"
-#include "wheel/traits/header.h"
+#include "header.h"
+#include "wheel/containers/optional/header.h"
+#include "wheel/containers/vec/header.h"
 #include "wheel/misc/bitops.h"
-#include "wheel/optional/header.h"
-#include "wheel/vec/header.h"
+#include "wheel/traits/header.h"
 #include <math.h>
 
 #ifndef LIBWHEEL_EHT_BUCKET_COUNT

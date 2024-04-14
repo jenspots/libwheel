@@ -6,10 +6,10 @@
 #include "wheel/eht/header.h"
 #endif // LIBWHEEL_TRAIT_HASHABLE
 
-#include "wheel/interface/header.h"
-#include "wheel/linked_list/header.h"
-#include "wheel/optional/header.h"
-#include "wheel/rc/header.h"
-#include "wheel/stack/header.h"
-#include "wheel/trie/header.h"
-#include "wheel/vec/header.h"
+#include "wheel/traits/header.h"
+#include "wheel/containers/linked_list/header.h"
+#include "wheel/containers/optional/header.h"
+#include "wheel/containers/rc/header.h"
+#include "wheel/containers/stack/header.h"
+#include "wheel/containers/trie/header.h"
+#include "wheel/containers/vec/header.h"
