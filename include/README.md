@@ -1,0 +1,3 @@
+## About
+
+This directory as a whole is exported to the end user. Typically, the only required import is [`<wheel.h>`](./wheel.h), which exports all other modules. Additionally, some implementations for standard library data types are provided in the [`std`](./wheel/std) directory and can be directly. For example, [`<wheel/std/int.h>`](./wheel/std/int.h) and [`<wheel/std/string.h>`](./wheel/std/string.h).
