@@ -14,15 +14,15 @@ The conventions below will use the `type` datatype as a placeholder and omit the
 Some functionality is optional and can be enabled by defining a trait. Some require the implementation of specific
 functions.
 
-| Trait                     | Description                             | Required functions     |
-|---------------------------|-----------------------------------------|------------------------|
-| `LIBWHEEL_SHALLOW_COPY`   | Shallow copies an instance              | `trait_shallow_copy`   |
-| `LIBWHEEL_DEEP_COPY`      | Deep copies an instance                 | `trait_deep_copy`      |
-| `LIBWHEEL_EQUAL`          | Compares two instances by equality      | `trait_equal`          |
-| `LIBWHEEL_COMPARE`        | Compares two instances by order         | `trait_compare`        |
-| `LIBWHEEL_HASH`           | Calculate the hash value of an instance | `trait_hash`           |
-| `LIBWHEEL_STRINGIFY`      | Convert an instance to a `char*`        | `trait_stringify`      |
-| `LIBWHEEL_SERIALIZE_JSON` | Serialize an instance to JSON           | `trait_serialize_json` |
+| Trait                           | Description                             | Required functions     |
+|---------------------------------|-----------------------------------------|------------------------|
+| `LIBWHEEL_TRAIT_SHALLOW_COPY`   | Shallow copies an instance              | `trait_shallow_copy`   |
+| `LIBWHEEL_TRAIT_DEEP_COPY`      | Deep copies an instance                 | `trait_deep_copy`      |
+| `LIBWHEEL_TRAIT_EQUAL`          | Compares two instances by equality      | `trait_equal`          |
+| `LIBWHEEL_TRAIT_COMPARE`        | Compares two instances by order         | `trait_compare`        |
+| `LIBWHEEL_TRAIT_HASH`           | Calculate the hash value of an instance | `trait_hash`           |
+| `LIBWHEEL_TRAIT_STRINGIFY`      | Convert an instance to a `char*`        | `trait_stringify`      |
+| `LIBWHEEL_TRAIT_SERIALIZE_JSON` | Serialize an instance to JSON           | `trait_serialize_json` |
 
 ### Constructors, destructors
 
@@ -44,15 +44,15 @@ However, allocating data on the heap is supported.
 
 #### Index based
 
-| Function signature                    | Description                                                                                                     | Required traits         |
-|---------------------------------------|-----------------------------------------------------------------------------------------------------------------|-------------------------|
-| `optional get(type*, uint64_t index)` | Copies an element based on index. Returns `optional_empty` when not present or when the index is out-of-bounds. | `LIBWHEEL_SHALLOW_COPY` |
-| `T* get_ptr(type*, uint64_t index)`   | Retrieve an element based on index, and returns `NULL` if not present or the index is out-of-bounds             | None                    |
+| Function signature                    | Description                                                                                                     | Required traits               |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------|-------------------------------|
+| `optional get(type*, uint64_t index)` | Copies an element based on index. Returns `optional_empty` when not present or when the index is out-of-bounds. | `LIBWHEEL_TRAIT_SHALLOW_COPY` |
+| `T* get_ptr(type*, uint64_t index)`   | Retrieve an element based on index, and returns `NULL` if not present or the index is out-of-bounds             | None                          |
 
 ### Serialization
 
 #### JSON
 
-| Function signature                            | Description                                                                                                             | Required traits           |
-|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| `uint64t serialize_json(type*, char* target)` | Serialize an instance to JSON and write into the target string. If the target is `NULL`, the required size is returned. | `LIBWHEEL_SERIALIZE_JSON` |
+| Function signature                            | Description                                                                                                             | Required traits                 |
+|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| `uint64t serialize_json(type*, char* target)` | Serialize an instance to JSON and write into the target string. If the target is `NULL`, the required size is returned. | `LIBWHEEL_TRAIT_SERIALIZE_JSON` |
