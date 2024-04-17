@@ -350,4 +350,48 @@ bool vec_next(vec_iter* it) {
     }
 }
 
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+optional vec_head(const vec* v) {
+    for (uint64_t i = 0; i < v->size; ++i) {
+        if (vec_bit_get(&v->present, i)) {
+            return optional_of(trait_shallow_copy(v->values[i]));
+        }
+    }
+
+    return optional_empty();
+}
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
+
+LIBWHEEL_TYPE* vec_head_ptr(const vec* v) {
+    for (uint64_t i = 0; i < v->size; ++i) {
+        if (vec_bit_get(&v->present, i)) {
+            return v->values + i;
+        }
+    }
+
+    return NULL;
+}
+
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+optional vec_last(const vec* v) {
+    for (int64_t i = v->size - 1; i >= 0; --i) {
+        if (vec_bit_get(&v->present, i)) {
+            return optional_of(trait_shallow_copy(v->values[i]));
+        }
+    }
+
+    return optional_empty();
+}
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
+
+LIBWHEEL_TYPE* vec_last_ptr(const vec* v) {
+    for (int64_t i = v->size - 1; i >= 0; --i) {
+        if (vec_bit_get(&v->present, i)) {
+            return v->values + i;
+        }
+    }
+
+    return NULL;
+}
+
 #include "wheel/wheel/undef.h"

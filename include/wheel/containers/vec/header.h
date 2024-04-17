@@ -42,6 +42,42 @@ void vec_destroy_ptr(vec** v);
 
 #ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
 /**
+ * retrieve the first element in a vector.
+ * @param v the vector to get the value from.
+ * @return a shallow copy of the first element in the vector, or
+ * `optional_empty` if it doesn't exist.
+ * @note this function requires the `LIBWHEEL_TRAIT_SHALLOW_COPY` trait.
+ */
+optional vec_head(const vec* v);
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
+
+/**
+ * Retrieve the first element in a vector.
+ * @param v The vector to get the value from.
+ * @return A pointer to the first element in the vector, or null if it doesn't exist.
+ */
+LIBWHEEL_TYPE* vec_head_ptr(const vec* v);
+
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+/**
+ * Retrieve the last element in a vector.
+ * @param v The vector to get the value from.
+ * @return A shallow copy of the last element in the vector, or
+ * `optional_empty` if it doesn't exist.
+ * @note This function requires the `LIBWHEEL_TRAIT_SHALLOW_COPY` trait.
+ */
+optional vec_last(const vec* v);
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
+
+/**
+ * Retrieve the last element in a vector.
+ * @param v The vector to get the value from.
+ * @return A pointer to the last element in the vector, or null if it doesn't exist.
+ */
+LIBWHEEL_TYPE* vec_last_ptr(const vec* v);
+
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+/**
  * Shallow copy the value at the given index in a vector.
  * @param v The vector to get the value from.
  * @param index The index of the element to be copied.
