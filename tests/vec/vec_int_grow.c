@@ -2,7 +2,7 @@
 
 int main() {
     vec_int v = vec_int_init();
-    uint64_t initial_size = v.size;
+    int64_t initial_size = v.size;
 
     for (int i = 0; i < initial_size; ++i) {
         vec_int_set(&v, i, i);

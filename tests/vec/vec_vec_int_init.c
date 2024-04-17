@@ -13,8 +13,8 @@ int main() {
         vec_vec_int_set(&matrix, i, row);
     }
 
-    for (uint64_t i = 0; i < 10; ++i) {
-        for (uint64_t j = 0; j < 10; ++j) {
+    for (int64_t i = 0; i < 10; ++i) {
+        for (int64_t j = 0; j < 10; ++j) {
             optional_vec_int row = vec_vec_int_get(&matrix, i);
             assert(row.present);
             optional_int element = vec_int_get(&row.value, j);

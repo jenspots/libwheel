@@ -87,7 +87,7 @@ LIBWHEEL_TYPE* vec_last_ptr(const vec* v);
  * @note This function requires the `LIBWHEEL_TRAIT_SHALLOW_COPY` trait.
  * @see `vec_get_ptr` for a pointer to the value.
  */
-optional vec_get(const vec* v, uint64_t index);
+optional vec_get(const vec* v, int64_t index);
 #endif
 
 /**
@@ -98,7 +98,7 @@ optional vec_get(const vec* v, uint64_t index);
  * exist, or the index is out of bounds, the pointer will be null.
  * @see `vec_get` for a shallow copy of the value.
  */
-LIBWHEEL_TYPE* vec_get_ptr(const vec* v, uint64_t index);
+LIBWHEEL_TYPE* vec_get_ptr(const vec* v, int64_t index);
 
 #ifdef LIBWHEEL_TRAIT_SERIALIZE_JSON
 /**
@@ -111,7 +111,7 @@ LIBWHEEL_TYPE* vec_get_ptr(const vec* v, uint64_t index);
  * otherwise the required buffer size is returned.
  * @note This function requires the `LIBWHEEL_TRAIT_SERIALIZE_JSON` trait.
  */
-uint64_t vec_serialize_json(const vec* v, char* target);
+int64_t vec_serialize_json(const vec* v, char* target);
 #endif // LIBWHEEL_TRAIT_SERIALIZE_JSON
 
 /**
@@ -154,11 +154,11 @@ bool vec_next(vec_iter* it);
 
 vec vec_with_cap(int64_t capacity);
 
-optional vec_pop(vec* v, uint64_t index);
+optional vec_pop(vec* v, int64_t index);
 
 void vec_grow(vec* v);
 
-void vec_set(vec* v, uint64_t index, LIBWHEEL_TYPE value);
+void vec_set(vec* v, int64_t index, LIBWHEEL_TYPE value);
 
 void vec_foreach(vec* v, void (*f)(LIBWHEEL_TYPE));
 

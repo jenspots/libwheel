@@ -41,8 +41,20 @@ int64_t string_trait_compare(const char* a, const char* b) {
 }
 
 #define LIBWHEEL_TRAIT_HASHABLE
+/**
+ * Hash a string based on the FNV-1a algorithm.
+ * @param t
+ * @return
+ */
 uint64_t string_trait_hash(const char* t) {
-    exit(-1);
+    uint64_t hash = 14695981039346656037ULL;
+
+    for (const char *i = t; *i != '\0'; i++) {
+        hash ^= (uint64_t) *i;
+        hash *= 1099511628211ULL;
+    }
+
+    return hash;
 }
 
 #define LIBWHEEL_TRAIT_DESTROY

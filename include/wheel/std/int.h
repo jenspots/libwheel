@@ -52,7 +52,7 @@ uint64_t int_trait_serialize_json(char* target, const int t) {
 }
 
 #define LIBWHEEL_TRAIT_DESTROY
-void int_trait_destroy(const int t) {
+void int_trait_destroy(const int t __attribute__((unused))) {
     // Do nothing.
 }
 

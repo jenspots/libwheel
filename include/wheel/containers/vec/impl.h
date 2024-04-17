@@ -50,7 +50,7 @@ void vec_destroy(vec* v) {
     assert(v);
     assert(v->values);
 
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
             trait_destroy(v->values[i]);
         }
@@ -84,7 +84,7 @@ vec vec_with_cap(int64_t capacity) {
 }
 
 #ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
-optional vec_get(const vec* v, const uint64_t index) {
+optional vec_get(const vec* v, const int64_t index) {
     assert(v);
 
     if (index >= v->size) {
@@ -99,7 +99,7 @@ optional vec_get(const vec* v, const uint64_t index) {
 }
 #endif // LIBWHEEL_TRAIT_SHALLOW_COPY
 
-inline LIBWHEEL_TYPE* vec_get_ptr(const vec* v, const uint64_t index) {
+inline LIBWHEEL_TYPE* vec_get_ptr(const vec* v, const int64_t index) {
     assert(v);
 
     if (index >= v->size) {
@@ -113,7 +113,7 @@ inline LIBWHEEL_TYPE* vec_get_ptr(const vec* v, const uint64_t index) {
     return v->values + index;
 }
 
-optional vec_pop(vec* v, uint64_t index) {
+optional vec_pop(vec* v, int64_t index) {
     assert(v);
 
     if (index >= v->size) {
@@ -137,7 +137,7 @@ void vec_grow(vec* v) {
     assert(v->values);
 }
 
-void vec_set(vec* v, uint64_t index, LIBWHEEL_TYPE value) {
+void vec_set(vec* v, int64_t index, LIBWHEEL_TYPE value) {
     assert(v);
 
     while (index >= v->size) {
@@ -149,7 +149,7 @@ void vec_set(vec* v, uint64_t index, LIBWHEEL_TYPE value) {
 }
 
 void vec_foreach(vec* v, void (*f)(LIBWHEEL_TYPE)) {
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
             f(v->values[i]);
         }
@@ -159,7 +159,7 @@ void vec_foreach(vec* v, void (*f)(LIBWHEEL_TYPE)) {
 void vec_map(vec* v, LIBWHEEL_TYPE (*f)(LIBWHEEL_TYPE)) {
     assert(v);
 
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
             v->values[i] = f(v->values[i]);
         }
@@ -169,7 +169,7 @@ void vec_map(vec* v, LIBWHEEL_TYPE (*f)(LIBWHEEL_TYPE)) {
 void vec_filter(vec* v, bool (*f)(LIBWHEEL_TYPE)) {
     assert(v);
 
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i) && !f(v->values[i])) {
             vec_bit_set(&v->present, i, false);
             trait_destroy(v->values[i]);
@@ -215,11 +215,11 @@ vec vec_deep_copy(const vec* v) {
 #endif // LIBWHEEL_TRAIT_DEEP_COPY
 
 #ifdef LIBWHEEL_TRAIT_SERIALIZE_JSON
-uint64_t vec_serialize_json(const vec* v, char* target) {
+int64_t vec_serialize_json(const vec* v, char* target) {
     // Calculate the total length of the JSON string.
-    uint64_t total_length = 2; // '[' and ']'
+    int64_t total_length = 2; // '[' and ']'
 
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
            total_length += trait_serialize_json(NULL, v->values[i]);
            total_length += 1; // ','
@@ -232,10 +232,10 @@ uint64_t vec_serialize_json(const vec* v, char* target) {
 
     // Open the array.
     target[0] = '[';
-    uint64_t offset = 1;
+    int64_t offset = 1;
 
     // Serialize each value separately.
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
             offset += trait_serialize_json(target + offset, v->values[i]);
             target[offset] = ',';
@@ -352,7 +352,7 @@ bool vec_next(vec_iter* it) {
 
 #ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
 optional vec_head(const vec* v) {
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
             return optional_of(trait_shallow_copy(v->values[i]));
         }
@@ -363,7 +363,7 @@ optional vec_head(const vec* v) {
 #endif // LIBWHEEL_TRAIT_SHALLOW_COPY
 
 LIBWHEEL_TYPE* vec_head_ptr(const vec* v) {
-    for (uint64_t i = 0; i < v->size; ++i) {
+    for (int64_t i = 0; i < v->size; ++i) {
         if (vec_bit_get(&v->present, i)) {
             return v->values + i;
         }

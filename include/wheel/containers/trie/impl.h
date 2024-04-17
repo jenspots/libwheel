@@ -133,7 +133,7 @@ optional trie_node_add(trie_node* node, const char* string, LIBWHEEL_TYPE value)
         }
 
         // Overloop de skip-string en roep node_branch op indien nodig.
-        for (int i = 0; i < node->skip_length; ++i) {
+        for (uint64_t i = 0; i < node->skip_length; ++i) {
             if (string[i] == '\0' || node->skip[i] != string[i]) {
                 trie_node_branch(node, string, i, value);
                 return optional_empty();

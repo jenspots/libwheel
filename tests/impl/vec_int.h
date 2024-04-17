@@ -10,7 +10,7 @@
 vec_int vec_int_trait_shallow_copy(const vec_int v) {
     vec_int result = vec_int_init();
 
-    for (uint64_t i = 0; i < v.size; ++i) {
+    for (int64_t i = 0; i < v.size; ++i) {
         vec_bit_set(&result.present, i, vec_bit_get(&v.present, i));
         result.values[i] = v.values[i];
     }

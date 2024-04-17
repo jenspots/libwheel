@@ -6,7 +6,7 @@ int main() {
     /*
      * Initialize an empty list with `n` zero elements.
      */
-    for (uint64_t i = 0; i < 64; ++i) {
+    for (int64_t i = 0; i < 64; ++i) {
         ll_int_append(&l, 0);
     }
 
@@ -15,7 +15,7 @@ int main() {
     /*
      * Set the n-th element to `n`.
      */
-    for (uint64_t i = 0; i < 64; ++i) {
+    for (int64_t i = 0; i < 64; ++i) {
         ll_int_set(&l, i, i);
     }
 
@@ -23,7 +23,7 @@ int main() {
      * Check if all elements are correctly set.
      */
     ll_int_node* n = l.head;
-    for (uint64_t i = 0; i < 64; ++i) {
+    for (int64_t i = 0; i < 64; ++i) {
         assert(n != NULL);
         assert(n->element == i);
         n = n->next;

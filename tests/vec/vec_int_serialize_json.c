@@ -47,7 +47,7 @@ void test_single_element() {
     assert(strcmp(output, "[5]") == 0);
 }
 
-int main(int argc, char** argv) {
+int main() {
     test_empty();
     test_single_element();
     test_simple();

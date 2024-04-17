@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <wheel/std/int.h>
 
-int main(int argc, char** argv) {
+int main() {
     vec_int v = vec_int_with_cap(5);
     assert(v.size == 5);
     for (int j = 0; j < 10; ++j) {
