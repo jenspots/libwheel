@@ -1,6 +1,14 @@
 #include "wheel/wheel/def.h"
 
+/**
+ * A dynamically sized array which may contain empty slots.
+ */
 typedef struct vec vec;
+
+/**
+ * A vector iterator.
+ */
+typedef struct vec_iter vec_iter;
 
 /**
  * Initialize a new vector with the default capacity.
@@ -70,7 +78,45 @@ LIBWHEEL_TYPE* vec_get_ptr(const vec* v, uint64_t index);
 uint64_t vec_serialize_json(const vec* v, char* target);
 #endif // LIBWHEEL_TRAIT_SERIALIZE_JSON
 
-vec vec_with_cap(uint64_t capacity);
+/**
+ * Create an iterator which traverses the vector forwards.
+ * @param v The vector to create the iterator for.
+ * @return An iterator pointing to the first element in the vector.
+ */
+vec_iter vec_begin(const vec* v);
+
+/**
+ * Create an iterator which traverses the vector backwards.
+ * @param v The vector to create the iterator for.
+ * @return An iterator pointing to the last element in the vector.
+ */
+vec_iter vec_rbegin(const vec* v);
+
+/**
+ * Retrieve an element based off the current position of the iterator.
+ * @param it The iterator to retrieve the element from.
+ * @return A shallow copy of the element at the current position.
+ * @note This function requires the `LIBWHEEL_TRAIT_OPTIONAL` trait.
+ * @note Errors if the iterator is out of bounds or invalid.
+ */
+LIBWHEEL_TYPE vec_iget(vec_iter* it);
+
+/**
+ * Retrieve a pointer to an element based off the current position of the iterator.
+ * @param it The iterator to retrieve the element from.
+ * @return A pointer to the element at the current position.
+ * @note Errors if the iterator is out of bounds or invalid.
+ */
+LIBWHEEL_TYPE* vec_iget_ptr(vec_iter* it);
+
+/**
+ * Advances the iterator to the next element.
+ * @param it The iterator to advance.
+ * @return True if the iterator points to another element, false otherwise.
+ */
+bool vec_next(vec_iter* it);
+
+vec vec_with_cap(int64_t capacity);
 
 optional vec_pop(vec* v, uint64_t index);
 

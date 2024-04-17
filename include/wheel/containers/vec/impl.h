@@ -19,8 +19,14 @@
 typedef struct vec {
     LIBWHEEL_TYPE* values;
     vec_bit present;
-    uint64_t size;
+    int64_t size;
 } vec;
+
+typedef struct vec_iter {
+    const vec* v;
+    int64_t index;
+    bool forward;
+} vec_iter;
 
 vec vec_init() {
     vec v = {
@@ -65,7 +71,7 @@ void vec_destroy_ptr(vec** v) {
     *v = NULL;
 }
 
-vec vec_with_cap(uint64_t capacity) {
+vec vec_with_cap(int64_t capacity) {
     assert(capacity > 0);
     vec v = {
         .values = malloc(capacity * sizeof(LIBWHEEL_TYPE)),
@@ -246,5 +252,101 @@ uint64_t vec_serialize_json(const vec* v, char* target) {
     return total_length;
 }
 #endif // LIBWHEEL_TRAIT_SERIALIZE_JSON
+
+vec_iter vec_begin(const vec* v) {
+    vec_iter result = {
+        .v = v,
+        .forward = true,
+    };
+
+    // Find the first set element.
+    for (int i = 0; i < v->size; ++i) {
+        if (vec_bit_get(&v->present, i)) {
+            result.index = i;
+            return result;
+        }
+    }
+
+    // No elements are found, so the iterator points to the end.
+    result.index = v->size;
+    return result;
+}
+
+vec_iter vec_rbegin(const vec* v) {
+    vec_iter result = {
+        .v = v,
+        .forward = false,
+    };
+
+    // Find the last set element.
+    for (int64_t i = v->size - 1; i >= 0; --i) {
+        if (vec_bit_get(&v->present, i)) {
+            result.index = i;
+            return result;
+        }
+    }
+
+    // No elements are found, so the iterator points to the end.
+    result.index = -1;
+    return result;
+}
+
+#ifdef LIBWHEEL_TRAIT_SHALLOW_COPY
+LIBWHEEL_TYPE vec_iget(vec_iter* it) {
+    if (it->index == -1 || it->index == it->v->size) {
+        fprintf(stderr, "vec_iter is out of bounds or invalid.");
+        exit(EXIT_FAILURE);
+    }
+
+    return it->v->values[it->index];
+}
+#endif // LIBWHEEL_TRAIT_SHALLOW_COPY
+
+LIBWHEEL_TYPE* vec_iget_ptr(vec_iter* it) {
+    if (it->index == -1 || it->index == it->v->size) {
+        fprintf(stderr, "vec_iter is out of bounds or invalid.");
+        exit(EXIT_FAILURE);
+    }
+
+    return it->v->values + it->index;
+}
+
+bool vec_next(vec_iter* it) {
+    if (it->forward) {
+        // Check if finished.
+        if (it->index == it->v->size) {
+            return false;
+        }
+
+        // Find next element.
+        for (int64_t i = it->index + 1; i < it->v->size; ++i) {
+            if (vec_bit_get(&it->v->present, i)) {
+                it->index = i;
+                return true;
+            }
+        }
+
+        // None found.
+        it->index = it->v->size;
+        return false;
+    } else {
+        // Check if finished.
+        if (it->index == -1) {
+            return false;
+        }
+
+        // Find next element.
+        for (int64_t i = it->index - 1; i >= 0; --i) {
+            if (vec_bit_get(&it->v->present, i)) {
+                it->index = i;
+                return true;
+            }
+        }
+
+        // None found.
+        it->index = -1;
+        return false;
+    }
+}
 
 #include "wheel/wheel/undef.h"

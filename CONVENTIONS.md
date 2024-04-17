@@ -75,7 +75,7 @@ However, allocating data on the heap is supported.
 
 ### Iterators
 
-In Wheel, iterators are simple structs that represent the state of an iteration. The functionality itself is fully implemented by containers themselves. For example, the iterator of a vector only requires a pointer to a vector, the current index, and it's direction.
+In Wheel, iterators are simple structs that represent the state of an iteration. The functionality itself is fully implemented by containers themselves. For example, the iterator of a vector only requires a pointer to a vector, the current index, and it's direction. There is no contract between containers on how to implement such a structure.
 
 ```c
 typedef struct {
@@ -85,12 +85,12 @@ typedef struct {
 } vec_iter;
 ```
 
-| Function signature     | Description                                                                                          | Required traits               |
-|------------------------|------------------------------------------------------------------------------------------------------|-------------------------------|
-| `iter begin(type*)`    | TODO                                                                                                 | None                          |
-| `iter rbegin(type*)`   | TODO                                                                                                 | None                          |
-| `iter end(type*)`      | TODO                                                                                                 | None                          | 
-| `iter rend(type*)`     | TODO                                                                                                 | None                          |
-| `optional iget(iter*)` | TODO                                                                                                 | `LIBWHEEL_TRAIT_SHALLOW_COPY` |   
-| `T* iget_ptr(iter*)`   | TODO                                                                                                 | None                          |
-| `bool next(iter*)`     | Advance the iterator to the next element. The returned boolean indicates whether an element remains. | None                          |
+Iterators should never use dynamic memory allocation and may be dropped at any time. It is the responsibility of the user to ensure that the underlying container is not modified while iterating.
+
+| Function signature     | Description                                                                                                             | Required traits               |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------|-------------------------------|
+| `iter begin(type*)`    | Initialize a forwards vector pointing to the first element.                                                             | None                          |
+| `iter rbegin(type*)`   | Initialize a backwards vector pointing to the last element.                                                             | None                          |
+| `optional iget(iter*)` | Retrieves the element pointed to by the iterator. Exits if the iterator has reached the end or is invalid.              | `LIBWHEEL_TRAIT_SHALLOW_COPY` |   
+| `T* iget_ptr(iter*)`   | Retrieves a pointer to the element pointed to by the iterator. Exits if the iterator has reached the end or is invalid. | None                          |
+| `bool next(iter*)`     | Advance the iterator to the next element. The returned boolean indicates whether an element remains.                    | None                          |

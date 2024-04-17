@@ -17,3 +17,12 @@
 #undef vec_shallow_copy
 #undef vec_deep_copy
 #undef vec_serialize_json
+
+#undef vec_iter
+#undef vec_begin
+#undef vec_rbegin
+#undef vec_end
+#undef vec_rend
+#undef vec_iget
+#undef vec_iget_ptr
+#undef vec_next

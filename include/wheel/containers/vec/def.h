@@ -19,3 +19,12 @@
 #define vec_shallow_copy   LIBWHEEL_DEFINE(vec, shallow_copy)
 #define vec_deep_copy      LIBWHEEL_DEFINE(vec, deep_copy)
 #define vec_serialize_json LIBWHEEL_DEFINE(vec, serialize_json)
+
+#define vec_iter      LIBWHEEL_DEFINE(vec, iter)
+#define vec_begin     LIBWHEEL_DEFINE(vec, begin)
+#define vec_rbegin    LIBWHEEL_DEFINE(vec, rbegin)
+#define vec_end       LIBWHEEL_DEFINE(vec, end)
+#define vec_rend      LIBWHEEL_DEFINE(vec, rend)
+#define vec_iget      LIBWHEEL_DEFINE(vec, iget)
+#define vec_iget_ptr  LIBWHEEL_DEFINE(vec, iget_ptr)
+#define vec_next      LIBWHEEL_DEFINE(vec, next)
