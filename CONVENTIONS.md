@@ -42,6 +42,15 @@ However, allocating data on the heap is supported.
 
 ### Retrieving elements
 
+#### Position based
+
+| Function signature     | Description                                                                           | Required traits               |
+|------------------------|---------------------------------------------------------------------------------------|-------------------------------|
+| `optional head(type*)` | Retrieve the first element of the container. Returns `optional_empty` if it is empty. | `LIBWHEEL_TRAIT_SHALLOW_COPY` | 
+| `T* head_ptr(type*)`   | Retrieve the first element of the container. Returns `NULL` if it is empty.           | None                          |
+| `optional last(type*)` | Retrieve the last element of the container. Returns `optional_empty` if it is empty.  | `LIBWHEEL_TRAIT_SHALLOW_COPY` |   
+| `T* last_ptr(type*)`   | Retrieve the last element of the container. Returns `NULL` if it is empty.            | None                          |             
+
 #### Index based
 
 | Function signature                    | Description                                                                                                     | Required traits               |
@@ -56,3 +65,32 @@ However, allocating data on the heap is supported.
 | Function signature                            | Description                                                                                                             | Required traits                 |
 |-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------|
 | `uint64t serialize_json(type*, char* target)` | Serialize an instance to JSON and write into the target string. If the target is `NULL`, the required size is returned. | `LIBWHEEL_TRAIT_SERIALIZE_JSON` |
+
+### Algorithms
+
+| Function signature                     | Description                                                                                                                                                                                                  | Required traits               |
+|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|
+| `optional binary_search(type*, T key)` | Search for a key in a container. Returns `optional_empty` if not found. If the container does not inherently sort it's elements, the operation may return a false negative if not preceded by a `sort` call. | `LIBWHEEL_TRAIT_COMPARE`      |
+| `void sort(type*)`                     | Sort the elements of a container in-place.                                                                                                                                                                   | `LIBWHEEL_TRAIT_COMPARE`      |
+
+### Iterators
+
+In Wheel, iterators are simple structs that represent the state of an iteration. The functionality itself is fully implemented by containers themselves. For example, the iterator of a vector only requires a pointer to a vector, the current index, and it's direction.
+
+```c
+typedef struct {
+  vector* vec;
+  uint64_t index;
+  bool forward;
+} vec_iter;
+```
+
+| Function signature     | Description                                                                                          | Required traits               |
+|------------------------|------------------------------------------------------------------------------------------------------|-------------------------------|
+| `iter begin(type*)`    | TODO                                                                                                 | None                          |
+| `iter rbegin(type*)`   | TODO                                                                                                 | None                          |
+| `iter end(type*)`      | TODO                                                                                                 | None                          | 
+| `iter rend(type*)`     | TODO                                                                                                 | None                          |
+| `optional iget(iter*)` | TODO                                                                                                 | `LIBWHEEL_TRAIT_SHALLOW_COPY` |   
+| `T* iget_ptr(iter*)`   | TODO                                                                                                 | None                          |
+| `bool next(iter*)`     | Advance the iterator to the next element. The returned boolean indicates whether an element remains. | None                          |
